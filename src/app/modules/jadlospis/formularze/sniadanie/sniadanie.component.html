@@ -1,0 +1,61 @@
+<form class="row mt-3" [formGroup]="form">
+  <mat-form-field class="col-4">
+    <mat-label>Danie główne</mat-label>
+    <mat-select formControlName="glowne">
+      <mat-option *ngFor="let item of glowne" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-4">
+    <mat-label>Pieczywo</mat-label>
+    <mat-select formControlName="pieczywo">
+      <mat-option *ngFor="let item of pieczywo" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-4">
+    <mat-label>Wedlina</mat-label>
+    <mat-select formControlName="wedlina">
+      <mat-option *ngFor="let item of wedlina" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-4">
+    <mat-label>Napój</mat-label>
+    <mat-select formControlName="napoj">
+      <mat-option *ngFor="let item of napoj" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-4">
+    <mat-label>Warzywo</mat-label>
+    <mat-select formControlName="warzywo">
+      <mat-option *ngFor="let item of warzywo" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-4">
+    <mat-label>Nabiał</mat-label>
+    <mat-select formControlName="nabial">
+      <mat-option *ngFor="let item of nabial" [value]="item.name">
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+</form>
+
+<div class="my-3">
+  <button mat-raised-button color="zapisz" class="mx-4" (click)="save()">zapisz</button>
+  <button mat-raised-button color="resetuj" (click)="resetuj()">resetuj</button>
+</div>

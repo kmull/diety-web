@@ -1,0 +1,23 @@
+mat-toolbar {
+  margin: 20px, 0;
+}
+
+.header {
+  margin: 0, 20px;
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px;
+}
+
+a:hover {
+  color: wheat;
+  opacity: 0.85;
+  // background-color: navy;
+  background-color: #663399;
+}

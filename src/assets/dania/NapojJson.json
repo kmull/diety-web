@@ -1,0 +1,39 @@
+{
+  "napoj": [
+    {
+      "id": 1,
+      "type": "napoj",
+      "name": "Kawa zbożowa z mlekiem (250ml)"
+    },
+    {
+      "id": 2,
+      "type": "napoj",
+      "name": "Herbata zielona (250ml)"
+    },
+    {
+      "id": 3,
+      "type": "napoj",
+      "name": "Herbata czarna (250ml)"
+    },
+    {
+      "id": 4,
+      "type": "napoj",
+      "name": "Sok pomarańczowy (250ml)"
+    },
+    {
+      "id": 5,
+      "type": "napoj",
+      "name": "Sok jabłkowy (250ml)"
+    },
+    {
+      "id": 6,
+      "type": "napoj",
+      "name": "Kakao (250ml)"
+    },
+    {
+      "id": 7,
+      "type": "napoj",
+      "name": "Kefir (250ml)"
+    }
+  ]
+}

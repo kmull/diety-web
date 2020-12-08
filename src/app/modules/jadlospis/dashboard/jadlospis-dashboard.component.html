@@ -1,0 +1,21 @@
+<mat-card>
+  <!-- <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>Diety</mat-card-title>
+  </mat-card-header> -->
+
+  <mat-card-content>
+    <app-formularz [dzien]="dzien"
+                   [selectedDanie]="dania"
+                   [isSecondBreakfast]="isSecondBreakfast"
+                   [isAfternoonSnack]="isAfternoonSnack">
+    </app-formularz>
+    <br>
+    <br>
+    <app-tabela-jadlospis (outRecord)="onSelected($event)"
+                          (outDania)="onSelectedDania($event)"
+                          (outAfternoonSnack)="isAfternoonSnack=$event"
+                          (outSecondBreakfast)="isSecondBreakfast=$event">
+    </app-tabela-jadlospis>
+  </mat-card-content>
+</mat-card>

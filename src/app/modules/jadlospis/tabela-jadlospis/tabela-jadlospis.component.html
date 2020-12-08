@@ -1,0 +1,118 @@
+<mat-card>
+  <mat-card-content>
+    <!-- <h2 class="example-h2">Checkbox configuration</h2> -->
+    <section class="example-section">
+      <mat-checkbox class="example-margin"
+                    (click)="isSecondBreakfastChange()">
+        <!-- [(ngModel)]="isSecondBreakfast" -->
+        Drugie śniadanie
+      </mat-checkbox>
+
+      <mat-checkbox class="example-margin"
+                    (click)="isAfternoonSnackChange()">
+        <!-- [(ngModel)]="isAfternoonSnack" -->
+        Podwieczorek
+      </mat-checkbox>
+    </section>
+
+    <!-- <button mat-button color="accent" (click)="print()"> -->
+    <button mat-button color="primary" (click)="exporter.exportTable('csv')">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        print
+      </mat-icon>
+    </button>
+
+    <button mat-button color="warn" (click)="openDialog()">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        save
+      </mat-icon>
+    </button>
+
+    <button mat-button color="warn">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        backup
+      </mat-icon>
+    </button>
+
+
+ <button mat-button color="accent" (click)="downloadPdf()">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        print 2
+      </mat-icon>
+    </button>
+    <!-- <button mat-button color="accent" (click)="exporter.exportTable('csv')">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        print
+      </mat-icon>
+    </button> -->
+    <!-- <button mat-button color="primary" (click)="exporter.exportTable('txt')">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        print
+      </mat-icon>
+    </button>
+
+    <button mat-button color="warn" (click)="exporter.exportTable('xlsx')">
+      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+        print
+      </mat-icon>
+    </button> -->
+
+
+  </mat-card-content>
+</mat-card>
+
+
+<div class="example-container mat-elevation-z8">
+  <mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="dzien">
+      <mat-header-cell *matHeaderCellDef> Dzień </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.dzien}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="sniadanie">
+      <mat-header-cell *matHeaderCellDef> Śniadanie </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.sniadanie}} </mat-cell>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container *ngIf="isSecondBreakfast" matColumnDef="drugieSniadanie">
+      <mat-header-cell *matHeaderCellDef> Drugie śniadanie </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.drugieSniadanie}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="obiad">
+      <mat-header-cell *matHeaderCellDef> Obiad </mat-header-cell>
+      <mat-cell class="my-2" *matCellDef="let element"> {{element.obiad}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container *ngIf="isAfternoonSnack" matColumnDef="podwieczorek">
+      <mat-header-cell *matHeaderCellDef> Podwieczorek </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.podwieczorek}} </mat-cell>
+    </ng-container>
+
+    <!-- Kolacja Column -->
+    <ng-container matColumnDef="kolacja">
+      <mat-header-cell *matHeaderCellDef> Kolacja </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.kolacja}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             [ngClass]="{hovered: row.hovered,
+              highlightTableColor: selectedRowIndex == row.dzien}"
+             (click)="rowSelected(row)" (mouseover)="row.hovered = true"
+             (mouseout)="row.hovered = false">
+    </mat-row>
+  </mat-table>
+</div>
+
+<!-- <button mat-button color="accent" (click)="print()">
+  <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+    print
+  </mat-icon>
+</button> -->

@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { JadlospisModel } from './../../../models/jadlospis-model';
 import { MatDialog } from '@angular/material/dialog';
 import { ZapiszModalComponent } from './zapisz-modal/zapisz-modal.component';
+import { ZapisaneDietyModalComponent } from './zapisane-diety-modal/zapisane-diety-modal.component';
 // import jsPDF from 'jspdf';
 // import 'jspdf-autotable';
 // import * as autoTable from 'jspdf-autotable';
@@ -83,7 +84,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       .subscribe();
   }
 
-  mapDanie(danie) {
+  mapDanie(danie): string {
     console.log('danie', danie);
     let wynik = '';
     for (const key of Object.keys(danie)) {
@@ -95,7 +96,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     return wynik;
   }
 
-  rowSelected(row) {
+  rowSelected(row): void {
     const index = this.dania.findIndex(i => i.dzien === row.dzien);
     this.selectedDanie = this.dania[index];
     this.outDania.emit(this.selectedDanie);
@@ -105,13 +106,13 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     this.outRecord.emit(row.dzien);
   }
 
-  isSecondBreakfastChange() {
+  isSecondBreakfastChange(): void {
     this.isSecondBreakfast = !this.isSecondBreakfast;
     this.outSecondBreakfast.emit(this.isSecondBreakfast);
     this.tableOptions();
   }
 
-  isAfternoonSnackChange() {
+  isAfternoonSnackChange(): void {
     this.isAfternoonSnack = !this.isAfternoonSnack;
     this.outAfternoonSnack.emit(this.isAfternoonSnack);
     this.tableOptions();
@@ -129,9 +130,9 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     }
   }
 
-  openDialog(): void {
+  openDialogZapisz(): void {
     const dialogRef = this.dialog.open(ZapiszModalComponent, {
-      width: '250px',
+      width: '300px',
       data: {}
     });
 
@@ -154,7 +155,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     });
   }
 
-  downloadPdf() {
+  downloadPdf(): void {
     // var prepare=[];
     // this.Listtrackigobjct.forEach(e=>{
     //   var tempObj =[];
@@ -178,7 +179,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     // doc.save('dieta' + '.pdf');
 
   }
-// }
+  // }
   // print() { }
 
   //   print = () => {
@@ -209,6 +210,42 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   //     body: data
   //   });
   //   doc.save('table.pdf');
+  // }
+
+  // openDialogZapisaneDiety(): void {
+  //   this.dietaService.loadDiety(1).subscribe();
+  // }
+
+  openDialogZapisaneDiety(): void {
+    this.dietaService.loadAllDiety().subscribe();
+  }
+
+
+  // openDialogZapisaneDiety() {
+  //   const dialogRef = this.dialog.open(ZapisaneDietyModalComponent, {
+  //     width: '700px',
+  //     height: '600px',
+  //     data: {}
+  //   });
+
+  //   dialogRef.afterClosed()
+  //     .subscribe(dieta => {
+  //       if (dieta) {
+  //         console.log('result', dieta);
+  //         this.dieta = dieta;
+  //         this.dieta.dane = [
+  //           JSON.stringify(this.dania[0]),
+  //           JSON.stringify(this.dania[1]),
+  //           JSON.stringify(this.dania[2]),
+  //           JSON.stringify(this.dania[3]),
+  //           JSON.stringify(this.dania[4]),
+  //           JSON.stringify(this.dania[5]),
+  //           JSON.stringify(this.dania[6]),
+  //         ];
+  //         // this.dieta.dane = this.dania;
+  //         this.dietaService.saveDiety(this.dieta).subscribe();
+  //       }
+  //     });
   // }
 
 }

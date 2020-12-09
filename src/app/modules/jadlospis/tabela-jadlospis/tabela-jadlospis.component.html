@@ -2,14 +2,12 @@
   <mat-card-content>
     <!-- <h2 class="example-h2">Checkbox configuration</h2> -->
     <section class="example-section">
-      <mat-checkbox class="example-margin"
-                    (click)="isSecondBreakfastChange()">
+      <mat-checkbox class="example-margin" (click)="isSecondBreakfastChange()">
         <!-- [(ngModel)]="isSecondBreakfast" -->
         Drugie śniadanie
       </mat-checkbox>
 
-      <mat-checkbox class="example-margin"
-                    (click)="isAfternoonSnackChange()">
+      <mat-checkbox class="example-margin" (click)="isAfternoonSnackChange()">
         <!-- [(ngModel)]="isAfternoonSnack" -->
         Podwieczorek
       </mat-checkbox>
@@ -22,20 +20,20 @@
       </mat-icon>
     </button>
 
-    <button mat-button color="warn" (click)="openDialog()">
+    <button mat-button color="warn" (click)="openDialogZapisz()">
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         save
       </mat-icon>
     </button>
 
-    <button mat-button color="warn">
+    <button mat-button color="warn" (click)="openDialogZapisaneDiety()">
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         backup
       </mat-icon>
     </button>
 
 
- <button mat-button color="accent" (click)="downloadPdf()">
+    <button mat-button color="accent" (click)="downloadPdf()">
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         print 2
       </mat-icon>
@@ -102,11 +100,9 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-             [ngClass]="{hovered: row.hovered,
-              highlightTableColor: selectedRowIndex == row.dzien}"
-             (click)="rowSelected(row)" (mouseover)="row.hovered = true"
-             (mouseout)="row.hovered = false">
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered,
+              highlightTableColor: selectedRowIndex == row.dzien}" (click)="rowSelected(row)"
+      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
     </mat-row>
   </mat-table>
 </div>

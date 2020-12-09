@@ -20,7 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableExporterModule } from 'mat-table-exporter';
 import { ZapiszModalComponent } from './tabela-jadlospis/zapisz-modal/zapisz-modal.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ZapisaneDietyModalComponent } from './tabela-jadlospis/zapisane-diety-modal/zapisane-diety-modal.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     DrugieSniadanieFormComponent,
     PodwieczorekFormComponent,
     JadlospisDashboardComponent,
-    ZapiszModalComponent
+    ZapiszModalComponent,
+    ZapisaneDietyModalComponent
   ],
   imports: [
     CommonModule,

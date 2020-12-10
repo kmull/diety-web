@@ -1,3 +1,6 @@
+<!-- <app-przyciski [isSecondBreakfast]="isSecondBreakfast" [isAfternoonSnack]="isAfternoonSnack"
+  [selectedDzien]="selectedDzien" [dataSource]="dataSource"></app-przyciski> -->
+
 <mat-card>
   <mat-card-content>
     <!-- <h2 class="example-h2">Checkbox configuration</h2> -->
@@ -11,10 +14,31 @@
         <!-- [(ngModel)]="isAfternoonSnack" -->
         Podwieczorek
       </mat-checkbox>
+
+      <!-- <button mat-button color="accent" (click)="print()"> -->
+      <div class="function-buttons">
+        <button mat-button color="primary" (click)="exporter.exportTable('csv')">
+          <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+            print
+          </mat-icon>
+        </button>
+
+        <button mat-button color="warn" (click)="openDialogZapisz()">
+          <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+            save
+          </mat-icon>
+        </button>
+
+        <button mat-button color="warn" (click)="openDialogZapisaneDiety()">
+          <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
+            backup
+          </mat-icon>
+        </button>
+      </div>
     </section>
 
     <!-- <button mat-button color="accent" (click)="print()"> -->
-    <button mat-button color="primary" (click)="exporter.exportTable('csv')">
+    <!-- <button mat-button color="primary" (click)="exporter.exportTable('csv')">
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         print
       </mat-icon>
@@ -30,14 +54,33 @@
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         backup
       </mat-icon>
+    </button> -->
+
+    <button mat-button class="btn btn-dark mr-4" [disabled]="!selectedDzien" (click)="resetRow()">
+      Resetuj wiersz
+    </button>
+
+    <mat-form-field class="mx-4">
+      <mat-label>Favorite food</mat-label>
+      <mat-select [(ngModel)]="selectedResetDanieOption" name="dania">
+        <mat-option *ngFor="let item of resetDanieOptions" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button class="btn btn-dark" [disabled]="!selectedDzien || !selectedResetDanieOption"
+      (click)="resetDanie()">
+      Resetuj Danie
     </button>
 
 
-    <button mat-button color="accent" (click)="downloadPdf()">
+    <!-- <button mat-button color="accent" (click)="downloadPdf()">
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         print 2
       </mat-icon>
-    </button>
+    </button> -->
+
     <!-- <button mat-button color="accent" (click)="exporter.exportTable('csv')">
       <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
         print

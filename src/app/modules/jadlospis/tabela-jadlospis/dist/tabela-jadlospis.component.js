@@ -13,13 +13,12 @@ var dni_tygodnia_enum_1 = require("../../../models/enums/dni-tygodnia-enum");
 var operators_1 = require("rxjs/operators");
 var dania_all_1 = require("./../../../models/dania-all");
 var zapisz_modal_component_1 = require("./zapisz-modal/zapisz-modal.component");
+var zapisane_diety_modal_component_1 = require("./zapisane-diety-modal/zapisane-diety-modal.component");
 // import jsPDF from 'jspdf';
 // import 'jspdf-autotable';
 // import * as autoTable from 'jspdf-autotable';
 var TabelaJadlospisComponent = /** @class */ (function () {
-    function TabelaJadlospisComponent(posilekService, 
-    // private mealDinnerService: MealDinnerService,
-    dietaService, dialog) {
+    function TabelaJadlospisComponent(posilekService, dietaService, dialog) {
         this.posilekService = posilekService;
         this.dietaService = dietaService;
         this.dialog = dialog;
@@ -32,6 +31,13 @@ var TabelaJadlospisComponent = /** @class */ (function () {
         this.dzien = dni_tygodnia_enum_1.DniTygodniaEnum.PONIEDZIALEK;
         this.isSecondBreakfast = false;
         this.isAfternoonSnack = false;
+        this.resetDanieOptions = [
+            { value: 'sniadanie', viewValue: 'Śniadanie' },
+            { value: 'drugieSniadanie', viewValue: 'Drugie śniadanie' },
+            { value: 'obiad', viewValue: 'Obiad' },
+            { value: 'podwieczorek', viewValue: 'Podwieczorek' },
+            { value: 'kolacja', viewValue: 'Kolacja' }
+        ];
         this.tableOptions();
     }
     TabelaJadlospisComponent.prototype.ngOnDestroy = function () {
@@ -40,8 +46,7 @@ var TabelaJadlospisComponent = /** @class */ (function () {
     };
     TabelaJadlospisComponent.prototype.ngOnInit = function () {
         var _this = this;
-        console.log('dataSource', this.dataSource);
-        this.dieta = new dieta_zapis_1.DietaZapis();
+        this.dieta = new dieta_zapis_1.Dieta();
         this.dania = [
             new dania_all_1.DaniaAll(dni_tygodnia_enum_1.DniTygodniaEnum.PONIEDZIALEK),
             new dania_all_1.DaniaAll(dni_tygodnia_enum_1.DniTygodniaEnum.WTOREK),
@@ -56,7 +61,6 @@ var TabelaJadlospisComponent = /** @class */ (function () {
             if (!!danie && !!danie.rodzajDania && !!danie.danie) {
                 var index = exports.ELEMENT_DATA.findIndex(function (i) { return i.dzien === _this.dzien; });
                 _this.dania[index][danie.rodzajDania] = danie.danie;
-                console.log('this.dania', _this.dania);
                 exports.ELEMENT_DATA[index][danie.rodzajDania] = _this.mapDanie(danie.danie);
                 _this.dataSource = exports.ELEMENT_DATA;
                 exports.ELEMENT_DATA.filter(function (osoba) { return osoba !== 'kasia'; });
@@ -65,7 +69,6 @@ var TabelaJadlospisComponent = /** @class */ (function () {
             .subscribe();
     };
     TabelaJadlospisComponent.prototype.mapDanie = function (danie) {
-        console.log('danie', danie);
         var wynik = '';
         for (var _i = 0, _a = Object.keys(danie); _i < _a.length; _i++) {
             var key = _a[_i];
@@ -74,12 +77,13 @@ var TabelaJadlospisComponent = /** @class */ (function () {
             }
             wynik += danie[key] + ', ';
         }
+        console.log('wynik', wynik);
         return wynik;
     };
     TabelaJadlospisComponent.prototype.rowSelected = function (row) {
         var index = this.dania.findIndex(function (i) { return i.dzien === row.dzien; });
-        this.selectedDanie = this.dania[index];
-        this.outDania.emit(this.selectedDanie);
+        this.selectedDzien = this.dania[index];
+        this.outDania.emit(this.selectedDzien);
         this.dzien = row.dzien;
         this.selectedRowIndex = row.dzien;
         this.outRecord.emit(row.dzien);
@@ -131,6 +135,20 @@ var TabelaJadlospisComponent = /** @class */ (function () {
                 _this.dietaService.saveDiety(_this.dieta).subscribe();
             }
         });
+    };
+    TabelaJadlospisComponent.prototype.resetRow = function () {
+        var _this = this;
+        var index = this.dataSource.findIndex(function (f) { return f.dzien === _this.selectedDzien.dzien; });
+        this.dataSource[index].sniadanie = null;
+        this.dataSource[index].drugieSniadanie = null;
+        this.dataSource[index].obiad = null;
+        this.dataSource[index].podwieczorek = null;
+        this.dataSource[index].kolacja = null;
+    };
+    TabelaJadlospisComponent.prototype.resetDanie = function () {
+        var _this = this;
+        var index = this.dataSource.findIndex(function (f) { return f.dzien === _this.selectedDzien.dzien; });
+        this.dataSource[index][this.selectedResetDanieOption] = null;
     };
     TabelaJadlospisComponent.prototype.downloadPdf = function () {
         // var prepare=[];
@@ -186,7 +204,14 @@ var TabelaJadlospisComponent = /** @class */ (function () {
     //   this.dietaService.loadDiety(1).subscribe();
     // }
     TabelaJadlospisComponent.prototype.openDialogZapisaneDiety = function () {
-        this.dietaService.loadAllDiety().subscribe();
+        var _this = this;
+        this.dietaService.loadAllDiety().subscribe(function (dietaList) {
+            var dialogRef = _this.dialog.open(zapisane_diety_modal_component_1.ZapisaneDietyModalComponent, {
+                width: '1000px',
+                height: '600px',
+                data: { dietaList: dietaList }
+            });
+        });
     };
     __decorate([
         core_1.Output()

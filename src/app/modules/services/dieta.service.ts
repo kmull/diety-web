@@ -1,5 +1,5 @@
 import { environment } from './../../../environments/environment';
-import { DietaZapis } from './../../models/dieta-zapis';
+import { Dieta } from './../../models/dieta-zapis';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -15,20 +15,20 @@ export class DietaService {
 
   constructor(private http: HttpClient) { }
 
-  saveDiety(dieta: DietaZapis): Observable<any> {
+  saveDiety(dieta: Dieta): Observable<any> {
     return this.http.post<any>(`${environment.baseApiUrl}/diety/save`, dieta,
       { headers: this.httpOptions.headers });
   }
 
-  loadDiety(id: number): Observable<DietaZapis> {
+  loadDiety(id: number): Observable<Dieta> {
     let params = new HttpParams();
     params = params.append('id', id.toString());
-    return this.http.get<DietaZapis>(`${environment.baseApiUrl}/diety/load`,
+    return this.http.get<Dieta>(`${environment.baseApiUrl}/diety/load`,
       { headers: this.httpOptions.headers, params: params });
   }
 
-  loadAllDiety(): Observable<DietaZapis> {
-    return this.http.get<DietaZapis>(`${environment.baseApiUrl}/diety/load-all`,
+  loadAllDiety(): Observable<Dieta> {
+    return this.http.get<Dieta>(`${environment.baseApiUrl}/diety/load-all`,
       { headers: this.httpOptions.headers });
   }
 

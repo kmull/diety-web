@@ -10,8 +10,7 @@ export class PosilekService {
 
   danie: BehaviorSubject<Danie> = new BehaviorSubject<Danie>(null);
 
-
-  setDanie(rodzajDania: RodzajDaniaEnum, danie: any) {
+  setDanie(rodzajDania: string, danie: any) {
     this.danie.next(new Danie(rodzajDania, danie));
   }
 

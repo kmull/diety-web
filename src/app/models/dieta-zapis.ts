@@ -1,9 +1,8 @@
 import { DaniaAll } from './dania-all';
 
-export class DietaZapis {
+export class Dieta {
   id: number;
   name: string;
   date: Date;
   dane: string[];
-  // dane: DaniaAll[];
 }

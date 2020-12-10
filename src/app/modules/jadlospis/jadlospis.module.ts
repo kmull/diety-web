@@ -22,6 +22,8 @@ import { MatTableExporterModule } from 'mat-table-exporter';
 import { ZapiszModalComponent } from './tabela-jadlospis/zapisz-modal/zapisz-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ZapisaneDietyModalComponent } from './tabela-jadlospis/zapisane-diety-modal/zapisane-diety-modal.component';
+import { PodgladDietModalComponent } from './tabela-jadlospis/podglad-diet-modal/podglad-diet-modal.component';
+import { PrzyciskiComponent } from './tabela-jadlospis/przyciski/przyciski.component';
 
 
 @NgModule({
@@ -34,7 +36,9 @@ import { ZapisaneDietyModalComponent } from './tabela-jadlospis/zapisane-diety-m
     PodwieczorekFormComponent,
     JadlospisDashboardComponent,
     ZapiszModalComponent,
-    ZapisaneDietyModalComponent
+    ZapisaneDietyModalComponent,
+    PodgladDietModalComponent,
+    PrzyciskiComponent
   ],
   imports: [
     CommonModule,

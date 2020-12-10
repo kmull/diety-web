@@ -1,1 +1,36 @@
-<p>zapisane-diety-modal works!</p>
+<div class="p-2">
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element?.id}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Nazwa </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element?.name}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="date">
+        <mat-header-cell *matHeaderCellDef> Data </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element?.date}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered,
+              highlightTableColor: selectedRowIndex == row?.id}" (click)="rowSelected(row)"
+        (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+      </mat-row>
+    </mat-table>
+  </div>
+
+  <div class="mt-4">
+    <app-podglad-diet-modal [dieta]="selectedDieta"></app-podglad-diet-modal>
+  </div>
+
+</div>

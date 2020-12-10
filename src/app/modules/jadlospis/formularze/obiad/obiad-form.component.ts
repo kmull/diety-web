@@ -48,10 +48,14 @@ export class ObiadFormComponent implements OnInit, OnChanges {
 
   ) {
     this.obiadValues$.subscribe(values => {
-      this.soup = [new Model(), ...values.soup];
-      this.danieGlowne = [new Model(), ...values.dinner];
-      this.surowka = [new Model(), ...values.salad];
-      this.dodatki = [new Model(), ...values.additions];
+      this.soup = [...values.soup];
+      this.danieGlowne = [...values.dinner];
+      this.surowka = [...values.salad];
+      this.dodatki = [...values.additions];
+      // this.soup = [new Model(), ...values.soup];
+      // this.danieGlowne = [new Model(), ...values.dinner];
+      // this.surowka = [new Model(), ...values.salad];
+      // this.dodatki = [new Model(), ...values.additions];
     });
 
     this.form = this.fb.group({

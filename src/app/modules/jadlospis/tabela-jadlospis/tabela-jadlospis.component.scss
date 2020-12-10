@@ -7,14 +7,14 @@
 
 .mat-table {
   overflow: auto;
-  max-height: 500px;
+  max-height: 520px;
 }
 
 table {
   width: 100%;
 }
 
-.highlightTableColor{
+.highlightTableColor {
   background: silver;
 }
 
@@ -42,8 +42,9 @@ mat-header-row {
   margin: 0 10px;
 }
 
-.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element, .mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
-   color: cadetblue;
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+.mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+  color: cadetblue;
 }
 
 .mat-header-cell {
@@ -51,6 +52,9 @@ mat-header-row {
   font-size: 14px;
 }
 
+.function-buttons {
+  margin-top: -10px;
+}
 
 // .basic-container {
 //   padding: 30px;

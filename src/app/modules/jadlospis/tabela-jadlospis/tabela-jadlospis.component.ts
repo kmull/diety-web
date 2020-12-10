@@ -1,4 +1,4 @@
-import { DietaZapis } from './../../../models/dieta-zapis';
+import { Dieta } from './../../../models/dieta-zapis';
 import { Component, OnInit, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { DniTygodniaEnum } from '../../../models/enums/dni-tygodnia-enum';
 import { PosilekService } from '../../services/posiłek.service';
@@ -32,17 +32,25 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   dzien: string = DniTygodniaEnum.PONIEDZIALEK;
   selectedRowIndex: any;
   dania: DaniaAll[];
-  selectedDanie: DaniaAll;
-  dieta: DietaZapis;
+  selectedDzien: DaniaAll;
+  dieta: Dieta;
 
   subskrypcja$: Subscription;
 
   isSecondBreakfast = false;
   isAfternoonSnack = false;
 
+  selectedResetDanieOption: string;
+  resetDanieOptions: any[] = [
+    { value: 'sniadanie', viewValue: 'Śniadanie' },
+    { value: 'drugieSniadanie', viewValue: 'Drugie śniadanie' },
+    { value: 'obiad', viewValue: 'Obiad' },
+    { value: 'podwieczorek', viewValue: 'Podwieczorek' },
+    { value: 'kolacja', viewValue: 'Kolacja' }
+  ];
+
   constructor(
     private posilekService: PosilekService,
-    // private mealDinnerService: MealDinnerService,
     private dietaService: DietaService,
     public dialog: MatDialog
   ) {
@@ -55,8 +63,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log('dataSource', this.dataSource);
-    this.dieta = new DietaZapis();
+    this.dieta = new Dieta();
     this.dania = [
       new DaniaAll(DniTygodniaEnum.PONIEDZIALEK),
       new DaniaAll(DniTygodniaEnum.WTOREK),
@@ -73,8 +80,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
           if (!!danie && !!danie.rodzajDania && !!danie.danie) {
             const index = ELEMENT_DATA.findIndex(i => i.dzien === this.dzien);
             this.dania[index][danie.rodzajDania] = danie.danie;
-            console.log('this.dania', this.dania);
-
             ELEMENT_DATA[index][danie.rodzajDania] = this.mapDanie(danie.danie);
             this.dataSource = ELEMENT_DATA;
             ELEMENT_DATA.filter(osoba => osoba !== 'kasia');
@@ -85,7 +90,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   }
 
   mapDanie(danie): string {
-    console.log('danie', danie);
     let wynik = '';
     for (const key of Object.keys(danie)) {
       if (key === 'dzien' || !danie[key]) {
@@ -93,13 +97,14 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       }
       wynik += danie[key] + ', ';
     }
+    console.log('wynik', wynik);
     return wynik;
   }
 
   rowSelected(row): void {
     const index = this.dania.findIndex(i => i.dzien === row.dzien);
-    this.selectedDanie = this.dania[index];
-    this.outDania.emit(this.selectedDanie);
+    this.selectedDzien = this.dania[index];
+    this.outDania.emit(this.selectedDzien);
 
     this.dzien = row.dzien;
     this.selectedRowIndex = row.dzien;
@@ -118,7 +123,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     this.tableOptions();
   }
 
-  tableOptions() {
+  tableOptions(): void {
     if (this.isAfternoonSnack && this.isSecondBreakfast) {
       this.displayedColumns = ['dzien', 'sniadanie', 'drugieSniadanie', 'obiad', 'podwieczorek', 'kolacja'];
     } else if (this.isAfternoonSnack) {
@@ -153,6 +158,20 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
         this.dietaService.saveDiety(this.dieta).subscribe();
       }
     });
+  }
+
+  resetRow() {
+    const index = this.dataSource.findIndex(f => f.dzien === this.selectedDzien.dzien);
+    this.dataSource[index].sniadanie = null;
+    this.dataSource[index].drugieSniadanie = null;
+    this.dataSource[index].obiad = null;
+    this.dataSource[index].podwieczorek = null;
+    this.dataSource[index].kolacja = null;
+  }
+
+  resetDanie() {
+    const index = this.dataSource.findIndex(f => f.dzien === this.selectedDzien.dzien);
+    this.dataSource[index][this.selectedResetDanieOption] = null;
   }
 
   downloadPdf(): void {
@@ -217,36 +236,14 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   // }
 
   openDialogZapisaneDiety(): void {
-    this.dietaService.loadAllDiety().subscribe();
+    this.dietaService.loadAllDiety().subscribe(dietaList => {
+      const dialogRef = this.dialog.open(ZapisaneDietyModalComponent, {
+        width: '1000px',
+        height: '600px',
+        data: { dietaList }
+      });
+    });
   }
-
-
-  // openDialogZapisaneDiety() {
-  //   const dialogRef = this.dialog.open(ZapisaneDietyModalComponent, {
-  //     width: '700px',
-  //     height: '600px',
-  //     data: {}
-  //   });
-
-  //   dialogRef.afterClosed()
-  //     .subscribe(dieta => {
-  //       if (dieta) {
-  //         console.log('result', dieta);
-  //         this.dieta = dieta;
-  //         this.dieta.dane = [
-  //           JSON.stringify(this.dania[0]),
-  //           JSON.stringify(this.dania[1]),
-  //           JSON.stringify(this.dania[2]),
-  //           JSON.stringify(this.dania[3]),
-  //           JSON.stringify(this.dania[4]),
-  //           JSON.stringify(this.dania[5]),
-  //           JSON.stringify(this.dania[6]),
-  //         ];
-  //         // this.dieta.dane = this.dania;
-  //         this.dietaService.saveDiety(this.dieta).subscribe();
-  //       }
-  //     });
-  // }
 
 }
 

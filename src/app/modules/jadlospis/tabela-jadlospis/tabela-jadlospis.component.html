@@ -1,110 +1,86 @@
-<!-- <app-przyciski [isSecondBreakfast]="isSecondBreakfast" [isAfternoonSnack]="isAfternoonSnack"
-  [selectedDzien]="selectedDzien" [dataSource]="dataSource"></app-przyciski> -->
-
 <mat-card>
   <mat-card-content>
     <!-- <h2 class="example-h2">Checkbox configuration</h2> -->
-    <section class="example-section">
-      <mat-checkbox class="example-margin" (click)="isSecondBreakfastChange()">
-        <!-- [(ngModel)]="isSecondBreakfast" -->
-        Drugie śniadanie
-      </mat-checkbox>
+    <section class="example-section"
+      class="row justify-content-between">
+      <div class="col-9">
+        <mat-checkbox style="margin-left: 15px;"
+          (click)="isSecondBreakfastChange()">
+          <!-- [(ngModel)]="isSecondBreakfast" -->
+          Drugie śniadanie
+        </mat-checkbox>
 
-      <mat-checkbox class="example-margin" (click)="isAfternoonSnackChange()">
-        <!-- [(ngModel)]="isAfternoonSnack" -->
-        Podwieczorek
-      </mat-checkbox>
+        <mat-checkbox style="margin-left: 30px;"
+          (click)="isAfternoonSnackChange()">
+          <!-- [(ngModel)]="isAfternoonSnack" -->
+          Podwieczorek
+        </mat-checkbox>
+      </div>
+      <!-- <div class="col-auto"></div> -->
 
-      <!-- <button mat-button color="accent" (click)="print()"> -->
-      <div class="function-buttons">
-        <button mat-button color="primary" (click)="exporter.exportTable('csv')">
-          <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-            print
-          </mat-icon>
-        </button>
+      <div class="function-buttons col-3 no-gutters">
 
-        <button mat-button color="warn" (click)="openDialogZapisz()">
-          <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-            save
-          </mat-icon>
-        </button>
+        <mat-icon class="mat-24 icons-styles"
+          matTooltip="Drukuj do EXCEL"
+          color="primary"
+          (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'dieta', Props: {Author: 'KM'}})"
+          aria-label="Example icon-button with a heart icon">
+          print
+        </mat-icon>
 
-        <button mat-button color="warn" (click)="openDialogZapisaneDiety()">
-          <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-            backup
-          </mat-icon>
-        </button>
+        <mat-icon class="mat-24 icons-styles"
+          matTooltip="Zapisz dane"
+          color="warn"
+          (click)="openDialogZapisz()"
+          aria-label="Example icon-button with a heart icon">
+          save
+        </mat-icon>
+
+        <mat-icon class="mat-24 icons-styles"
+          matTooltip="Załaduj dane"
+          color="accent"
+          (click)="openDialogZapisaneDiety()"
+          aria-label="Example icon-button with a heart icon">
+          backup
+        </mat-icon>
+
       </div>
     </section>
 
-    <!-- <button mat-button color="accent" (click)="print()"> -->
-    <!-- <button mat-button color="primary" (click)="exporter.exportTable('csv')">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        print
-      </mat-icon>
-    </button>
-
-    <button mat-button color="warn" (click)="openDialogZapisz()">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        save
-      </mat-icon>
-    </button>
-
-    <button mat-button color="warn" (click)="openDialogZapisaneDiety()">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        backup
-      </mat-icon>
-    </button> -->
-
-    <button mat-button class="btn btn-dark mr-4" [disabled]="!selectedDzien" (click)="resetRow()">
+    <button mat-button
+      class="btn btn-dark mr-4"
+      [disabled]="!selectedDania"
+      (click)="resetRow()">
       Resetuj wiersz
     </button>
 
     <mat-form-field class="mx-4">
-      <mat-label>Favorite food</mat-label>
-      <mat-select [(ngModel)]="selectedResetDanieOption" name="dania">
-        <mat-option *ngFor="let item of resetDanieOptions" [value]="item.value">
+      <mat-label>Posiłek</mat-label>
+      <mat-select [(ngModel)]="selectedResetDanieOption"
+        name="dania">
+        <mat-option *ngFor="let item of resetDanieOptions;"
+          [value]="item.value">
           {{item.viewValue}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <button mat-button class="btn btn-dark" [disabled]="!selectedDzien || !selectedResetDanieOption"
+    <button mat-button
+      class="btn btn-dark"
+      [disabled]="!selectedDania || !selectedResetDanieOption"
       (click)="resetDanie()">
       Resetuj Danie
     </button>
-
-
-    <!-- <button mat-button color="accent" (click)="downloadPdf()">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        print 2
-      </mat-icon>
-    </button> -->
-
-    <!-- <button mat-button color="accent" (click)="exporter.exportTable('csv')">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        print
-      </mat-icon>
-    </button> -->
-    <!-- <button mat-button color="primary" (click)="exporter.exportTable('txt')">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        print
-      </mat-icon>
-    </button>
-
-    <button mat-button color="warn" (click)="exporter.exportTable('xlsx')">
-      <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-        print
-      </mat-icon>
-    </button> -->
-
 
   </mat-card-content>
 </mat-card>
 
 
 <div class="example-container mat-elevation-z8">
-  <mat-table matTableExporter [dataSource]="dataSource" #exporter="matTableExporter">
+  <mat-table matTableExporter
+    [dataSource]="dataSource"
+    #exporter="matTableExporter"
+    id="ExampleTable">
 
     <!-- Position Column -->
     <ng-container matColumnDef="dzien">
@@ -119,7 +95,8 @@
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container *ngIf="isSecondBreakfast" matColumnDef="drugieSniadanie">
+    <ng-container *ngIf="isSecondBreakfast"
+      matColumnDef="drugieSniadanie">
       <mat-header-cell *matHeaderCellDef> Drugie śniadanie </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.drugieSniadanie}} </mat-cell>
     </ng-container>
@@ -127,11 +104,13 @@
     <!-- Weight Column -->
     <ng-container matColumnDef="obiad">
       <mat-header-cell *matHeaderCellDef> Obiad </mat-header-cell>
-      <mat-cell class="my-2" *matCellDef="let element"> {{element.obiad}} </mat-cell>
+      <mat-cell class="my-2"
+        *matCellDef="let element"> {{element.obiad}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container *ngIf="isAfternoonSnack" matColumnDef="podwieczorek">
+    <ng-container *ngIf="isAfternoonSnack"
+      matColumnDef="podwieczorek">
       <mat-header-cell *matHeaderCellDef> Podwieczorek </mat-header-cell>
       <mat-cell *matCellDef="let element"> {{element.podwieczorek}} </mat-cell>
     </ng-container>
@@ -143,15 +122,12 @@
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{hovered: row.hovered,
-              highlightTableColor: selectedRowIndex == row.dzien}" (click)="rowSelected(row)"
-      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false">
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered,
+              highlightTableColor: selectedRowIndex == row.dzien}"
+      (click)="rowSelected(row)"
+      (mouseover)="row.hovered = true"
+      (mouseout)="row.hovered = false">
     </mat-row>
   </mat-table>
 </div>
-
-<!-- <button mat-button color="accent" (click)="print()">
-  <mat-icon class="mat-24" aria-label="Example icon-button with a heart icon">
-    print
-  </mat-icon>
-</button> -->

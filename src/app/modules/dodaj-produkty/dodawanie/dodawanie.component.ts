@@ -35,12 +35,11 @@ export class DodawanieComponent implements OnInit {
   constructor(
     private mealDinnerService: MealDinnerService,
     private fb: FormBuilder
-  ) {}
+  ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   changeMealtype(mealType) {
-    console.log('item', mealType);
     this.selectedMealType = mealType;
     switch (mealType) {
       case RodzajDaniaEnum.SNIADANIE:
@@ -65,13 +64,11 @@ export class DodawanieComponent implements OnInit {
   }
 
   changeType(type) {
-    console.log('item', type);
     this.selectedType = type;
   }
 
   onSave() {
     this.meal.name = this.form.get('name').value;
-    console.log('meal', this.meal);
     if (this.form.valid) {
       this.mealDinnerService
         .saveMeal(this.selectedMealType, this.selectedType, this.meal)

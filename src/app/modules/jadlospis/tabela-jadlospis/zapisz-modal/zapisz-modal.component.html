@@ -3,15 +3,28 @@
   <!-- <p>Zapisz Dietę</p> -->
   <mat-form-field [formGroup]="form">
     <mat-label>nazwa</mat-label>
-    <input matInput [formControlName]="'name'">
+    <input matInput
+      [formControlName]="'name'">
   </mat-form-field>
 </div>
 
 <!-- <div [formGroup]="form" class="col-6">
   <input formControlName="name" matInput type="text" class="col-6" [placeholder]="'Wartość do zmiany'">
 </div> -->
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Anuluj</button>
-  <button mat-button (click)="onSave()">zapisz</button>
+<div class="row"
+  mat-dialog-actions>
+  <div class="col-3"></div>
+  <button mat-raised-button
+    class="btn btn-success"
+    (click)="onSave()">
+    zapisz
+  </button>
+
+  <button mat-raised-button
+    class="btn btn-info"
+    (click)="onNoClick()">
+    Anuluj
+  </button>
+
   <!-- <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button> -->
 </div>

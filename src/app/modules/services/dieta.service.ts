@@ -27,9 +27,16 @@ export class DietaService {
       { headers: this.httpOptions.headers, params: params });
   }
 
-  loadAllDiety(): Observable<Dieta> {
-    return this.http.get<Dieta>(`${environment.baseApiUrl}/diety/load-all`,
+  loadAllDiety(): Observable<Dieta[]> {
+    return this.http.get<Dieta[]>(`${environment.baseApiUrl}/diety/load-all`,
       { headers: this.httpOptions.headers });
+  }
+
+  deleteDiet(id: number): Observable<void> {
+    let params = new HttpParams();
+    params = params.append('id', id.toString());
+    return this.http.get<void>(`${environment.baseApiUrl}/diety/delete-by-id`,
+      { headers: this.httpOptions.headers, params: params });
   }
 
 }

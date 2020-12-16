@@ -18,13 +18,16 @@ export class ZapiszModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ZapiszModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public name: string
   ) { }
 
   ngOnInit(): void {
     this.dieta = new Dieta();
     this.dieta.date = new Date();
-
+    if (!!this.name) {
+      this.dieta.name = this.name;
+      this.form.get('name').setValue(this.name);
+    }
   }
 
   onNoClick(): void {

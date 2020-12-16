@@ -24,7 +24,9 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ZapisaneDietyModalComponent } from './tabela-jadlospis/zapisane-diety-modal/zapisane-diety-modal.component';
 import { PodgladDietModalComponent } from './tabela-jadlospis/podglad-diet-modal/podglad-diet-modal.component';
 import { PrzyciskiComponent } from './tabela-jadlospis/przyciski/przyciski.component';
-
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,9 @@ import { PrzyciskiComponent } from './tabela-jadlospis/przyciski/przyciski.compo
     MatCheckboxModule,
     MatTableExporterModule,
     MatDialogModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
     JadlospisRoutingModule
   ]
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { DrugieSniadanie } from './../../../../models/drugie-sniadanie';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { RodzajDaniaEnum } from '../../../../models/enums/rodzaj-dania-enum';
@@ -12,10 +12,29 @@ import { MealDinnerService } from '../../../services/meal-dinner.service';
   templateUrl: './drugie-sniadanie-form.component.html',
   styleUrls: ['./drugie-sniadanie-form.component.scss']
 })
-export class DrugieSniadanieFormComponent implements OnInit, OnChanges {
+export class DrugieSniadanieFormComponent {
 
-  @Input() dzien: string;
-  @Input() selectedDrugieSniadanie: DrugieSniadanie;
+  private _selectedDrugieSniadanie: DrugieSniadanie;
+  @Input() public get selectedDrugieSniadanie(): DrugieSniadanie {
+    return this._selectedDrugieSniadanie;
+  }
+  public set selectedDrugieSniadanie(value: DrugieSniadanie) {
+    this._selectedDrugieSniadanie = value;
+    if (!!value) {
+      this.setDrugieSniadanieValues(value.drugieSniadanie);
+    }
+  }
+
+  private _dzien: string;
+  @Input() public get dzien(): string {
+    return this._dzien;
+  }
+  public set dzien(value: string) {
+    this._dzien = value;
+    if (!!value) {
+      this.resetuj();
+    }
+  }
 
   form: FormGroup;
   drugieSniadanie = new DrugieSniadanie();
@@ -36,19 +55,8 @@ export class DrugieSniadanieFormComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.dzien && this.dzien) {
-      this.resetuj();
-    }
-    if (changes.selectedPodwieczorek && this.selectedDrugieSniadanie) {
-      this.setDrugieSniadanieValues();
-    }
-  }
-
-  ngOnInit(): void { }
-
-  setDrugieSniadanieValues() {
-    this.form.get('drugieSniadanie').setValue(this.drugieSniadanie.drugieSniadanie);
+  setDrugieSniadanieValues(value: string) {
+    this.form.get('drugieSniadanie').setValue(value);
   }
 
   save() {

@@ -1,4 +1,4 @@
-export interface JadlospisModel {
+export class JadlospisModel {
   dzien?: string;
   sniadanie?: string;
   drugieSniadanie?: string;

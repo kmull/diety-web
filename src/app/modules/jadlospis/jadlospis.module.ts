@@ -27,6 +27,10 @@ import { PrzyciskiComponent } from './tabela-jadlospis/przyciski/przyciski.compo
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { TableViewComponent } from './tabela-jadlospis/table-view/table-view.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -40,7 +44,8 @@ import { MatSortModule } from '@angular/material/sort';
     ZapiszModalComponent,
     ZapisaneDietyModalComponent,
     PodgladDietModalComponent,
-    PrzyciskiComponent
+    PrzyciskiComponent,
+    TableViewComponent
   ],
   imports: [
     CommonModule,
@@ -60,6 +65,9 @@ import { MatSortModule } from '@angular/material/sort';
     MatTooltipModule,
     MatPaginatorModule,
     MatSortModule,
+    MatTabsModule,
+    MatButtonToggleModule,
+    MatNativeDateModule,
     JadlospisRoutingModule
   ]
 })

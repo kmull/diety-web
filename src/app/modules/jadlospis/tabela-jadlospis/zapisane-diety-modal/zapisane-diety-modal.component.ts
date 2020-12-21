@@ -7,6 +7,7 @@ import { switchMap, tap } from 'rxjs/operators';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { KeyValue } from '@angular/common';
 
 @Component({
   selector: 'app-zapisane-diety-modal',
@@ -23,6 +24,20 @@ export class ZapisaneDietyModalComponent implements OnInit {
 
   selectedRowIndex: any;
   selectedDieta: Dieta;
+  selectedDaneList;
+  selectedDaneNames: KeyValue<string, string[]>[] = [
+    { key: 'Podstawowa', value: ['dzien', 'sniadanie', 'obiad', 'podwieczorek', 'kolacja'] },
+    { key: 'Bez laktozy', value: ['dzien', 'sniadanie', 'obiad', 'kolacja'] },
+    { key: 'Lekkostrawna', value: ['dzien', 'sniadanie', 'drugieSniadanie', 'obiad', 'kolacja'] },
+    { key: 'Wegetariańska', value: ['dzien', 'sniadanie', 'obiad', 'kolacja'] },
+    { key: 'Stołówka', value: ['dzien', 'obiad'] }
+  ];
+
+  DISPLAY_PODSTAWOWA = ['dzien', 'sniadanie', 'obiad', 'podwieczorek', 'kolacja'];
+  DISPLAY_BEZ_LAKTOZY = ['dzien', 'sniadanie', 'obiad', 'kolacja'];
+  DISPLAY_LEKKOSTRAWNA = ['dzien', 'sniadanie', 'drugieSniadanie', 'obiad', 'kolacja'];
+  DISPLAY_WEGETARIANSKA = ['dzien', 'sniadanie', 'obiad', 'kolacja'];
+  DISPLAY_STOLOWKA = ['dzien', 'obiad'];
 
   constructor(
     private dietaService: DietaService,
@@ -43,6 +58,12 @@ export class ZapisaneDietyModalComponent implements OnInit {
   rowSelected(row: Dieta): void {
     this.selectedRowIndex = row.id;
     this.selectedDieta = row;
+
+    this.selectedDaneList = [];
+    row.dane.forEach(f => {
+      this.selectedDaneList.push(f);
+    });
+    console.log('selectedDieta', this.selectedDieta);
   }
 
   onSave(): void {

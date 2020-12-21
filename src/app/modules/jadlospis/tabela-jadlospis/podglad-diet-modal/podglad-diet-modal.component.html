@@ -1,11 +1,9 @@
 <div *ngIf="dataSource?.length > 0">
 
-  <h3>Szczegóły</h3>
-
   <div class="example-container mat-elevation-z8">
     <mat-table matTableExporter
-      [dataSource]="dataSource"
-      #exporter="matTableExporter">
+               [dataSource]="dataSource"
+               #exporter="matTableExporter">
 
       <!-- Position Column -->
       <ng-container matColumnDef="dzien">
@@ -29,7 +27,7 @@
       <ng-container matColumnDef="obiad">
         <mat-header-cell *matHeaderCellDef> Obiad </mat-header-cell>
         <mat-cell class="my-2"
-          *matCellDef="let element"> {{element.obiad}} </mat-cell>
+                  *matCellDef="let element"> {{element.obiad}} </mat-cell>
       </ng-container>
 
       <!-- Symbol Column -->
@@ -46,7 +44,7 @@
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"
-        (mouseout)="row.hovered = false">
+               (mouseout)="row.hovered = false">
       </mat-row>
     </mat-table>
   </div>

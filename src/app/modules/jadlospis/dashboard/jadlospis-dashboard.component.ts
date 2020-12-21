@@ -10,8 +10,9 @@ export class JadlospisDashboardComponent implements OnInit {
 
   dzien: string;
   dania: DaniaAll;
-  isSecondBreakfast = false;
-  isAfternoonSnack = false;
+  // isSecondBreakfast = false;
+  // isAfternoonSnack = false;
+  index = 0;
 
   constructor() { }
 
@@ -24,6 +25,10 @@ export class JadlospisDashboardComponent implements OnInit {
 
   onSelectedDania(dania: DaniaAll) {
     this.dania = dania;
+  }
+
+  onIndex(index: number) {
+    this.index = index;
   }
 
 }

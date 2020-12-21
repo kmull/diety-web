@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { DaniaAll } from '../../../../models/dania-all';
+import { DaniaAll } from './../../../../models/dania-all';
+import { TypyDietIndex } from './../../../../models/enums/typy-diet-enum';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MatAccordion } from '@angular/material/expansion';
 
 @Component({
   selector: 'app-formularz',
@@ -8,11 +10,35 @@ import { DaniaAll } from '../../../../models/dania-all';
 })
 export class FormularzComponent implements OnInit {
 
-  @Input() dzien: string;
-  @Input() selectedDanie: DaniaAll;
-  @Input() isSecondBreakfast = false;
-  @Input() isAfternoonSnack = false;
+  @ViewChild(MatAccordion) accordion: MatAccordion;
 
+  @Input() dzien: string;
+
+  private _index = 0;
+  @Input() public get index(): number {
+    return this._index;
+  }
+
+  public set index(value: number) {
+    if (!value && !!this.accordion) {
+      this.accordion.closeAll();
+    }
+    this._index = value;
+  }
+
+  private _selectedDanie: DaniaAll;
+  @Input() public get selectedDanie(): DaniaAll {
+    return this._selectedDanie;
+  }
+
+  public set selectedDanie(value: DaniaAll) {
+    if (!value && !!this.accordion) {
+      this.accordion.closeAll();
+    }
+    this._selectedDanie = value;
+  }
+
+  TYPY_DIET_INDEX = TypyDietIndex;
   panelOpenState = false;
   constructor() { }
 

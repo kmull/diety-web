@@ -5,7 +5,8 @@ export class MapDietyUtil {
   public static mapDiety(diety: JadlospisModel[]): JadlospisModel[] {
     const jadlospis: JadlospisModel[] = [];
     diety.forEach(f => {
-      const dietaFromJson = JSON.parse(f.toString());
+      // const dietaFromJson = JSON.parse(f.toString());
+      const dietaFromJson = f;
       if (!!dietaFromJson) {
         if (!!dietaFromJson.sniadanie) {
           dietaFromJson.sniadanie = this.mapData(dietaFromJson.sniadanie).trim();

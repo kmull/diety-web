@@ -1,6 +1,7 @@
-<mat-accordion>
-  <!-- Śniadanie -->
-  <mat-expansion-panel [disabled]="!dzien">
+<mat-accordion class="example-headers-align"
+               [multi]="true">
+  <!-- Drugie śniadanie -->
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Śniadanie
@@ -16,7 +17,8 @@
   </mat-expansion-panel>
 
   <!-- Drugie śniadanie -->
-  <mat-expansion-panel [disabled]="!dzien || !isSecondBreakfast">
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.PODSTAWOWA || index === TYPY_DIET_INDEX.STOLOWKA
+  || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.WEGETARIANSKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Drugie śniadanie
@@ -50,7 +52,8 @@
   </mat-expansion-panel>
 
   <!-- Podwieczorek -->
-  <mat-expansion-panel [disabled]="!dzien || !isAfternoonSnack">
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.LEKKOSTRAWNA
+  || index === TYPY_DIET_INDEX.STOLOWKA || index === TYPY_DIET_INDEX.WEGETARIANSKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Podwieczorek
@@ -67,7 +70,7 @@
   </mat-expansion-panel>
 
   <!-- Kolacja -->
-  <mat-expansion-panel [disabled]="!dzien">
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Kolacja

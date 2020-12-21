@@ -1,5 +1,7 @@
-<mat-accordion>
-  <mat-expansion-panel>
+<mat-accordion #accordion="matAccordion"
+               class="jadlospis-content"
+               [multi]="true">
+  <mat-expansion-panel class="mx-3">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Dodaj produkt
@@ -12,7 +14,7 @@
     <app-dodawanie></app-dodawanie>
   </mat-expansion-panel>
 
-  <mat-expansion-panel>
+  <mat-expansion-panel class="mx-3">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Edytuj produkt

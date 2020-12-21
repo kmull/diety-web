@@ -1,6 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DaniaAll } from 'src/app/models/dania-all';
-import { JadlospisModel } from 'src/app/models/jadlospis-model';
 
 @Component({
   selector: 'app-przyciski',
@@ -9,35 +8,41 @@ import { JadlospisModel } from 'src/app/models/jadlospis-model';
 })
 export class PrzyciskiComponent implements OnInit {
 
-  @Input() dataSource: JadlospisModel[];
+  // @Output() outSecondBreakfast = new EventEmitter<boolean>();
+  // @Output() outAfternoonSnack = new EventEmitter<boolean>();
+
+  @Output() outOpenDialogZapisz = new EventEmitter<void>();
+  @Output() outOpenDialogZapisaneDiety = new EventEmitter<void>();
+  @Output() outDrukuj = new EventEmitter<void>();
+
+  @Output() outResetDanie = new EventEmitter<string>();
+  @Output() outResetRow = new EventEmitter<void>();
+  @Output() outResetTable = new EventEmitter<void>();
+
+  @Input() tableView: any;
   @Input() selectedDzien: DaniaAll;
   @Input() isSecondBreakfast: boolean;
   @Input() isAfternoonSnack: boolean;
+
+  @Input() selectedDania;
+  selectedResetDanieOption: string;
+
+  resetDanieOptions: any[] = [
+    { value: 'sniadanie', viewValue: 'Śniadanie' },
+    { value: 'drugieSniadanie', viewValue: 'Drugie śniadanie' },
+    { value: 'obiad', viewValue: 'Obiad' },
+    { value: 'podwieczorek', viewValue: 'Podwieczorek' },
+    { value: 'kolacja', viewValue: 'Kolacja' }
+  ];
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
-  // isSecondBreakfastChange(): void {
-  //   this.isSecondBreakfast = !this.isSecondBreakfast;
-  //   this.outSecondBreakfast.emit(this.isSecondBreakfast);
-  //   // this.tableOptions();
-  // }
-
-  // isAfternoonSnackChange(): void {
-  //   this.isAfternoonSnack = !this.isAfternoonSnack;
-  //   this.outAfternoonSnack.emit(this.isAfternoonSnack);
-  //   // this.tableOptions();
-  // }
-
-  resetRow() {
-    const index = this.dataSource.findIndex(f => f.dzien === this.selectedDzien.dzien);
-    this.dataSource[index].sniadanie = null;
-    this.dataSource[index].drugieSniadanie = null;
-    this.dataSource[index].obiad = null;
-    this.dataSource[index].podwieczorek = null;
-    this.dataSource[index].kolacja = null;
+  resetDanie() {
+    this.outResetDanie.emit(this.selectedResetDanieOption);
+    this.selectedResetDanieOption = null;
   }
 
 }

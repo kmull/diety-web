@@ -1,133 +1,63 @@
-<mat-card>
-  <mat-card-content>
-    <!-- <h2 class="example-h2">Checkbox configuration</h2> -->
-    <section class="example-section"
-      class="row justify-content-between">
-      <div class="col-9">
-        <mat-checkbox style="margin-left: 15px;"
-          (click)="isSecondBreakfastChange()">
-          <!-- [(ngModel)]="isSecondBreakfast" -->
-          Drugie śniadanie
-        </mat-checkbox>
+<app-przyciski [selectedDania]="selectedDania"
+               (outResetDanie)="onResetDanie($event)"
+               (outResetRow)="onResetRow()"
+               (outDrukuj)="onDrukuj()"
+               (outResetTable)="onResetTable()"
+               (outOpenDialogZapisz)="openDialogZapisz()"
+               (outOpenDialogZapisaneDiety)="openDialogZapisaneDiety()">
+</app-przyciski>
 
-        <mat-checkbox style="margin-left: 30px;"
-          (click)="isAfternoonSnackChange()">
-          <!-- [(ngModel)]="isAfternoonSnack" -->
-          Podwieczorek
-        </mat-checkbox>
-      </div>
-      <!-- <div class="col-auto"></div> -->
+<mat-tab-group [color]="'warn'"
+               [backgroundColor]="'accent'"
+               (selectedIndexChange)="onSelectedIndexChange($event)">
+  <mat-tab [label]="TYPY_DIET_NAZWY.PODSTAWOWA">
+    <app-table-view #podstawowatable
+                    [index]="0"
+                    [dania]="daniaList[0]"
+                    [displayedColumns]="DISPLAY_PODSTAWOWA"
+                    [dataSource]="dataSourceList[0]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
 
-      <div class="function-buttons col-3 no-gutters">
+  <mat-tab [label]="TYPY_DIET_NAZWY.BEZ_LAKTOZY">
+    <app-table-view #bezLaktozyTable
+                    [index]="1"
+                    [dania]="daniaList[1]"
+                    [displayedColumns]="DISPLAY_BEZ_LAKTOZY"
+                    [dataSource]="dataSourceList[1]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
 
-        <mat-icon class="mat-24 icons-styles"
-          matTooltip="Drukuj do EXCEL"
-          color="primary"
-          (click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'dieta', Props: {Author: 'KM'}})"
-          aria-label="Example icon-button with a heart icon">
-          print
-        </mat-icon>
+  <mat-tab [label]="TYPY_DIET_NAZWY.LEKKOSTRAWNA">
+    <app-table-view #lekkostrawnaTable
+                    [index]="2"
+                    [dania]="daniaList[2]"
+                    [displayedColumns]="DISPLAY_LEKKOSTRAWNA"
+                    [dataSource]="dataSourceList[2]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
 
-        <mat-icon class="mat-24 icons-styles"
-          matTooltip="Zapisz dane"
-          color="warn"
-          (click)="openDialogZapisz()"
-          aria-label="Example icon-button with a heart icon">
-          save
-        </mat-icon>
+  <mat-tab [label]="TYPY_DIET_NAZWY.WEGETARIANSKA">
+    <app-table-view #wegetarianskaTable
+                    [index]="3"
+                    [dania]="daniaList[3]"
+                    [displayedColumns]="DISPLAY_WEGETARIANSKA"
+                    [dataSource]="dataSourceList[3]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
 
-        <mat-icon class="mat-24 icons-styles"
-          matTooltip="Załaduj dane"
-          color="accent"
-          (click)="openDialogZapisaneDiety()"
-          aria-label="Example icon-button with a heart icon">
-          backup
-        </mat-icon>
+  <mat-tab [label]="TYPY_DIET_NAZWY.STOLOWKA">
+    <app-table-view #stolowkaTable
+                    [index]="4"
+                    [dania]="daniaList[4]"
+                    [displayedColumns]="DISPLAY_STOLOWKA"
+                    [dataSource]="dataSourceList[4]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
 
-      </div>
-    </section>
-
-    <button mat-button
-      class="btn btn-dark mr-4"
-      [disabled]="!selectedDania"
-      (click)="resetRow()">
-      Resetuj wiersz
-    </button>
-
-    <mat-form-field class="mx-4">
-      <mat-label>Posiłek</mat-label>
-      <mat-select [(ngModel)]="selectedResetDanieOption"
-        name="dania">
-        <mat-option *ngFor="let item of resetDanieOptions;"
-          [value]="item.value">
-          {{item.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <button mat-button
-      class="btn btn-dark"
-      [disabled]="!selectedDania || !selectedResetDanieOption"
-      (click)="resetDanie()">
-      Resetuj Danie
-    </button>
-
-  </mat-card-content>
-</mat-card>
-
-
-<div class="example-container mat-elevation-z8">
-  <mat-table matTableExporter
-    [dataSource]="dataSource"
-    #exporter="matTableExporter"
-    id="ExampleTable">
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="dzien">
-      <mat-header-cell *matHeaderCellDef> Dzień </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.dzien}} </mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="sniadanie">
-      <mat-header-cell *matHeaderCellDef> Śniadanie </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.sniadanie}} </mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container *ngIf="isSecondBreakfast"
-      matColumnDef="drugieSniadanie">
-      <mat-header-cell *matHeaderCellDef> Drugie śniadanie </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.drugieSniadanie}} </mat-cell>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="obiad">
-      <mat-header-cell *matHeaderCellDef> Obiad </mat-header-cell>
-      <mat-cell class="my-2"
-        *matCellDef="let element"> {{element.obiad}} </mat-cell>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container *ngIf="isAfternoonSnack"
-      matColumnDef="podwieczorek">
-      <mat-header-cell *matHeaderCellDef> Podwieczorek </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.podwieczorek}} </mat-cell>
-    </ng-container>
-
-    <!-- Kolacja Column -->
-    <ng-container matColumnDef="kolacja">
-      <mat-header-cell *matHeaderCellDef> Kolacja </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.kolacja}} </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"
-      [ngClass]="{hovered: row.hovered,
-              highlightTableColor: selectedRowIndex == row.dzien}"
-      (click)="rowSelected(row)"
-      (mouseover)="row.hovered = true"
-      (mouseout)="row.hovered = false">
-    </mat-row>
-  </mat-table>
-</div>
+</mat-tab-group>

@@ -4,38 +4,38 @@
 
   <div class="example-container mat-elevation-z8">
     <mat-table matTableExporter
-      matSort
-      [dataSource]="dataSource"
-      #exporter="matTableExporter">
+               matSort
+               [dataSource]="dataSource"
+               #exporter="matTableExporter">
 
       <!-- Position Column -->
       <ng-container matColumnDef="id">
         <mat-header-cell *matHeaderCellDef
-          mat-sort-header> Id </mat-header-cell>
+                         mat-sort-header> Id </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element?.id}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef
-          mat-sort-header> Nazwa </mat-header-cell>
+                         mat-sort-header> Nazwa </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element?.name}} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="date">
         <mat-header-cell *matHeaderCellDef
-          mat-sort-header> Data </mat-header-cell>
+                         mat-sort-header> Data </mat-header-cell>
         <mat-cell *matCellDef="let element"> {{element?.date}} </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"
-        [ngClass]="{hovered: row.hovered,
+               [ngClass]="{hovered: row.hovered,
               highlightTableColor: selectedRowIndex == row?.id}"
-        (click)="rowSelected(row)"
-        (mouseover)="row.hovered = true"
-        (mouseout)="row.hovered = false">
+               (click)="rowSelected(row)"
+               (mouseover)="row.hovered = true"
+               (mouseout)="row.hovered = false">
       </mat-row>
 
     </mat-table>
@@ -45,33 +45,46 @@
   </div>
 
   <div mat-dialog-actions
-    class="row mt-3 justify-content-end">
+       class="row mt-3 justify-content-end">
     <div class="col-4">
 
       <button mat-raised-button
-        class="btn btn-success ml-3"
-        (click)="onSave()"
-        [disabled]="!selectedDieta?.dane">
+              class="btn btn-success ml-3"
+              (click)="onSave()"
+              [disabled]="!selectedDieta?.dane">
         Załaduj
       </button>
 
       <button mat-raised-button
-        class="btn btn-danger ml-3"
-        (click)="onDelete()"
-        [disabled]="!selectedDieta?.dane">
+              class="btn btn-danger ml-3"
+              (click)="onDelete()"
+              [disabled]="!selectedDieta?.dane">
         Usuń
       </button>
 
       <button mat-raised-button
-        class="btn btn-info ml-3"
-        (click)="onCancel()">
+              class="btn btn-info ml-3"
+              (click)="onCancel()">
         Anuluj
       </button>
     </div>
   </div>
 
-  <div class="mt-4">
-    <app-podglad-diet-modal [dieta]="selectedDieta?.dane"></app-podglad-diet-modal>
+  <div *ngIf="!!selectedDaneList && !!selectedDaneList.length">
+    <h3>Szczegóły</h3>
+    <div class="mt-4">
+      <mat-tab-group [color]="'warn'"
+                     [backgroundColor]="'accent'">
+
+        <mat-tab *ngFor="let item of selectedDaneList; let index=index"
+                 [label]="selectedDaneNames[index].key">
+          <app-podglad-diet-modal [dieta]="item"
+                                  [displayedColumns]="selectedDaneNames[index].value">
+          </app-podglad-diet-modal>
+        </mat-tab>
+
+      </mat-tab-group>
+    </div>
   </div>
 
 </div>

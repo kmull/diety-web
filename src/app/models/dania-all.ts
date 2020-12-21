@@ -5,7 +5,7 @@ import { Sniadanie } from './sniadanie';
 export class DaniaAll {
   dzien?: string;
   sniadanie?: Sniadanie;
-  drugieSniadanie: any;
+  drugieSniadanie?: any;
   obiad?: Obiad;
   podwieczorek?: Podwieczorek;
   kolacja?: Sniadanie;

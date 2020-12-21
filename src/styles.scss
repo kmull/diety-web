@@ -1,0 +1,98 @@
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+body {
+  font-family: Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+.basic-container {
+  padding: 30px;
+}
+
+.version-info {
+  font-size: 8pt;
+  float: right;
+  margin: 8px;
+}
+
+.mat-row.hovered {
+  background: #eee;
+}
+
+.mat-row.highlighted {
+  // background: #999;
+}
+
+.highlighted {
+  // background: #999;
+  background: #efebe9;
+}
+
+/*
+  This is a work around for checkbox bug in material row
+  https://github.com/angular/material2/issues/8600
+*/
+mat-cell.mat-cell,
+mat-header-cell.mat-header-cell {
+  overflow: visible;
+}
+
+.mat-expansion-panel-header {
+  // background-color: gainsboro;
+  // background-color: #7986cb;
+  background-color: darkslategray;
+}
+
+.mat-table {
+  overflow: none;
+}
+
+.mat-expansion-panel-header:hover,
+.mat-expansion-panel-header:focus,
+.mat-expansion-panel-header:active {
+  // background-color: gainsboro;
+  // background-color: darkgoldenrod !important;
+  // background-color: lavender !important;
+  // background-color: #7986cb !important;
+  background-color: darkslategray !important;
+}
+
+.mat-expansion-panel-body {
+  // padding: 0 24px 16px;
+  // background-color: gold;
+  // background-color: #9fa8da;
+  background-color: cadetblue;
+}
+
+.mat-raised-button.mat-zapisz {
+  margin: 0, 20px;
+  // background-color: cadetblue;
+  // background-color: limegreen;
+  background-color: #28a745;
+  ;
+  color: white;
+  font-weight: 700;
+}
+
+.mat-raised-button.mat-resetuj {
+  margin: 0, 20px;
+  background-color: black;
+  color: white;
+  font-weight: 700;
+}
+
+.mat-expansion-panel-header-title,
+.mat-expansion-panel-header-description {
+  font-weight: 700;
+  color: white;
+}
+
+.mat-expansion-panel-header-title:hover,
+.mat-expansion-panel-header-description:hover,
+.mat-expansion-panel-header:hover {
+  color: bisque;
+}
+
+.mat-expansion-indicator::after {
+  color: white !important;
+}

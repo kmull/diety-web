@@ -1,0 +1,14 @@
+<mat-card class="jadlospis-content">
+
+  <mat-card-content>
+    <app-formularz [dzien]="dzien"
+                   [selectedDanie]="dania"
+                   [index]="index">
+    </app-formularz>
+
+    <app-tabela-jadlospis (outRecord)="onSelected($event)"
+                          (outDania)="onSelectedDania($event)"
+                          (outIndex)="onIndex($event)">
+    </app-tabela-jadlospis>
+  </mat-card-content>
+</mat-card>

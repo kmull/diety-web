@@ -1,0 +1,63 @@
+<app-przyciski [selectedDania]="selectedDania"
+               (outResetDanie)="onResetDanie($event)"
+               (outResetRow)="onResetRow()"
+               (outDrukuj)="onDrukuj()"
+               (outResetTable)="onResetTable()"
+               (outOpenDialogZapisz)="openDialogZapisz()"
+               (outOpenDialogZapisaneDiety)="openDialogZapisaneDiety()">
+</app-przyciski>
+
+<mat-tab-group [color]="'warn'"
+               [backgroundColor]="'accent'"
+               (selectedIndexChange)="onSelectedIndexChange($event)">
+  <mat-tab [label]="TYPY_DIET_NAZWY.PODSTAWOWA">
+    <app-table-view #podstawowatable
+                    [index]="0"
+                    [dania]="daniaList[0]"
+                    [displayedColumns]="DISPLAY_PODSTAWOWA"
+                    [dataSource]="dataSourceList[0]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
+
+  <mat-tab [label]="TYPY_DIET_NAZWY.BEZ_LAKTOZY">
+    <app-table-view #bezLaktozyTable
+                    [index]="1"
+                    [dania]="daniaList[1]"
+                    [displayedColumns]="DISPLAY_BEZ_LAKTOZY"
+                    [dataSource]="dataSourceList[1]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
+
+  <mat-tab [label]="TYPY_DIET_NAZWY.LEKKOSTRAWNA">
+    <app-table-view #lekkostrawnaTable
+                    [index]="2"
+                    [dania]="daniaList[2]"
+                    [displayedColumns]="DISPLAY_LEKKOSTRAWNA"
+                    [dataSource]="dataSourceList[2]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
+
+  <mat-tab [label]="TYPY_DIET_NAZWY.WEGETARIANSKA">
+    <app-table-view #wegetarianskaTable
+                    [index]="3"
+                    [dania]="daniaList[3]"
+                    [displayedColumns]="DISPLAY_WEGETARIANSKA"
+                    [dataSource]="dataSourceList[3]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
+
+  <mat-tab [label]="TYPY_DIET_NAZWY.STOLOWKA">
+    <app-table-view #stolowkaTable
+                    [index]="4"
+                    [dania]="daniaList[4]"
+                    [displayedColumns]="DISPLAY_STOLOWKA"
+                    [dataSource]="dataSourceList[4]"
+                    (outRecord)="rowSelected($event)">
+    </app-table-view>
+  </mat-tab>
+
+</mat-tab-group>

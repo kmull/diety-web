@@ -1,0 +1,39 @@
+{
+  "DaniaObiadowe": [
+    {
+      "id": 1,
+      "typ": "zupa",
+      "nazwa": "Zupa kalafiorowa z ziemniakami (450ml)"
+    },
+    {
+      "id": 2,
+      "typ": "zupa",
+      "nazwa": "zupa pomidorowa z ryżem (450ml)"
+    },
+    {
+      "id": 3,
+      "typ": "zupa",
+      "nazwa": "Żurek z ziemniakami i wędliną (450ml)"
+    },
+    {
+      "id": 4,
+      "typ": "zupa",
+      "nazwa": "Żurek z ziemniakami i wędliną (450ml)"
+    },
+    {
+      "id": 5,
+      "typ": "danieGlowne",
+      "nazwa": "Pieczeń wieprzowa, sałata ze śmietaną, kasza gryczana"
+    },
+    {
+      "id": 6,
+      "typ": "danieGlowne",
+      "nazwa": "Kotlet mielony smażony z cebulką, surówka z kapusty pekińskiej, ziemniaki"
+    },
+    {
+      "id": 7,
+      "typ": "danieGlowne",
+      "nazwa": "Gulasz wieprzowy z pieczarkami i warzywami, kasza jęczmienna"
+    }
+  ]
+}

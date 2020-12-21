@@ -1,0 +1,52 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 520px;
+}
+
+table {
+  width: 100%;
+}
+
+.highlightTableColor {
+  background-color: silver;
+}
+
+mat-row {
+  cursor: pointer;
+}
+
+mat-header-row {
+  // background-color: rgb(145, 145, 145);
+  // background-color: #7fa2d6;
+  background-color: #cfad31;
+  // background-color: #b9926d;
+  color: white;
+}
+
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.mat-checkbox-checked:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element,
+.mat-checkbox:active:not(.mat-checkbox-disabled).mat-accent .mat-ripple-element {
+  color: cadetblue;
+}
+
+.mat-header-cell {
+  color: black;
+  font-size: 14px;
+}

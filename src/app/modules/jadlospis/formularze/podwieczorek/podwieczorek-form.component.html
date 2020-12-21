@@ -1,0 +1,16 @@
+<form class="row mt-2" [formGroup]="form">
+    <mat-form-field class="col-6">
+      <mat-label>Podwieczorek</mat-label>
+      <mat-select [formControlName]="'podwieczorek'">
+        <mat-option *ngFor="let item of podwieczorekModel" [value]="item.name">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+</form>
+
+<div class="my-3">
+  <button mat-raised-button color="zapisz" class="mx-4" (click)="save()">zapisz</button>
+  <button mat-raised-button color="resetuj" (click)="resetuj()">resetuj</button>
+</div>

@@ -1,0 +1,29 @@
+{
+  "sniadGlowne": [
+    {
+      "id": 1,
+      "typ": "zupa",
+      "nazwa": "Makaron na mleku (450ml)"
+    },
+    {
+      "id": 2,
+      "typ": "nabial",
+      "nazwa": "Twarożek Grani (200g)"
+    },
+    {
+      "id": 3,
+      "typ": "zupa",
+      "nazwa": "Ryż na mleku (450ml)"
+    },
+    {
+      "id": 4,
+      "typ": "zupa",
+      "nazwa": "Kasza manna na mleku (450ml)"
+    },
+    {
+      "id": 5,
+      "typ": "zupa",
+      "nazwa": "Kasza jęczmienna na mleku (450ml)"
+    }
+  ]
+}

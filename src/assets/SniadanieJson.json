@@ -1,0 +1,59 @@
+{
+  "sniadanie": [
+    {
+      "id": 1,
+      "typ": "zupa",
+      "nazwa": "Makaron na mleku (450ml)"
+    },
+    {
+      "id": 2,
+      "typ": "pieczywo",
+      "nazwa": "Pieczywo z masłem"
+    },
+    {
+      "id": 3,
+      "typ": "pieczywo",
+      "nazwa": "Pieczywo z margaryną"
+    },
+    {
+      "id": 4,
+      "typ": "wedliny",
+      "nazwa": "polędwica wieprzowa (70g)"
+    },
+    {
+      "id": 5,
+      "typ": "nabial",
+      "nazwa": "twarożek Grani (200g)"
+    },
+    {
+      "id": 6,
+      "typ": "warzywo",
+      "nazwa": "papryka (30g)"
+    },
+    {
+      "id": 7,
+      "typ": "napoj",
+      "nazwa": "Kawa zbożowa z mlekiem (250ml)"
+    },
+    {
+      "id": 8,
+      "typ": "napoj",
+      "nazwa": "Herbata zielona (250ml)"
+    },
+    {
+      "id": 9,
+      "typ": "zupa",
+      "nazwa": "Ryż na mleku (450ml)"
+    },
+    {
+      "id": 10,
+      "typ": "zupa",
+      "nazwa": "Kasza manna na mleku (450ml)"
+    },
+    {
+      "id": 11,
+      "typ": "zupa",
+      "nazwa": "Kasza jęczmienna na mleku (450ml)"
+    }
+  ]
+}

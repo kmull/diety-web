@@ -1,0 +1,41 @@
+{
+  "DaniaObiadowe": [
+    {
+      "id": 1,
+      "type": "danieGlowne",
+      "name": "Pieczeń wieprzowa, sałata ze śmietaną, kasza gryczana"
+    },
+    {
+      "id": 2,
+      "type": "danieGlowne",
+      "name": "Kotlet mielony smażony z cebulką, surówka z kapusty pekińskiej, ziemniaki"
+    },
+    {
+      "id": 3,
+      "type": "danieGlowne",
+      "name": "Gulasz wieprzowy z pieczarkami i warzywami, kasza jęczmienna"
+    }
+  ],
+  "Zupy": [
+    {
+      "id": 1,
+      "type": "zupa",
+      "name": "Zupa kalafiorowa z ziemniakami (450ml)"
+    },
+    {
+      "id": 2,
+      "type": "zupa",
+      "name": "zupa pomidorowa z ryżem (450ml)"
+    },
+    {
+      "id": 3,
+      "type": "zupa",
+      "name": "Żurek z ziemniakami i wędliną (450ml)"
+    },
+    {
+      "id": 4,
+      "type": "zupa",
+      "name": "Żurek z ziemniakami i wędliną (450ml)"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+<div class="mt-3">
+  <mat-form-field class="col-6">
+    <mat-label>Typ dania</mat-label>
+    <mat-select>
+      <mat-option
+        *ngFor="let mealItem of mealTypeOption"
+        [value]="mealItem.name"
+        (click)="changeMealtype(mealItem.name)"
+      >
+        {{ mealItem.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="col-6">
+    <mat-label>Typ składnika</mat-label>
+    <mat-select
+      [disabled]="
+        !selectedMealType ||
+        (!!typeOption[0] && typeOption[0].name === 'drugie-sniadanie')
+      "
+    >
+      <mat-option
+        *ngFor="let item of typeOption"
+        [value]="item.name"
+        (click)="changeType(item.name)"
+      >
+        {{ item.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div [formGroup]="form" class="col-6">
+    <input
+      formControlName="name"
+      matInput
+      [required]="true"
+      type="text"
+      [placeholder]="'Wartość do zmiany'"
+    />
+  </div>
+</div>
+<button mat-raised-button color="zapisz" class="ml-4 my-3" (click)="onSave()">
+  Zapisz
+</button>

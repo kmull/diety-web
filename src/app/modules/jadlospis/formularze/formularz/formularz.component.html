@@ -1,0 +1,89 @@
+<mat-accordion class="example-headers-align"
+               [multi]="true">
+  <!-- Drugie śniadanie -->
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Śniadanie
+      </mat-panel-title>
+      <mat-panel-description>
+        Wstaw produkty dla śniadania
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+    <app-sniadanie [dzien]="dzien"
+                   [selectedSniadanie]="selectedDanie?.sniadanie">
+    </app-sniadanie>
+  </mat-expansion-panel>
+
+  <!-- Drugie śniadanie -->
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.PODSTAWOWA || index === TYPY_DIET_INDEX.STOLOWKA
+  || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.WEGETARIANSKA">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Drugie śniadanie
+      </mat-panel-title>
+      <mat-panel-description>
+        Wstaw produkty dla drugiego śniadania
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+    <app-drugie-sniadanie-form [dzien]="dzien"
+                               [selectedDrugieSniadanie]="selectedDanie?.drugieSniadanie">
+    </app-drugie-sniadanie-form>
+
+  </mat-expansion-panel>
+
+  <!-- Obiad -->
+  <mat-expansion-panel [disabled]="!dzien">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Obiad
+      </mat-panel-title>
+      <mat-panel-description>
+        Wstaw produkty dla obiadu
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+    <app-obiad-form [dzien]="dzien"
+                    [selectedObiad]="selectedDanie?.obiad">
+    </app-obiad-form>
+
+  </mat-expansion-panel>
+
+  <!-- Podwieczorek -->
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.LEKKOSTRAWNA
+  || index === TYPY_DIET_INDEX.STOLOWKA || index === TYPY_DIET_INDEX.WEGETARIANSKA">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Podwieczorek
+      </mat-panel-title>
+      <mat-panel-description>
+        Ustaw Podwieczorek
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+    <app-podwieczorek-form [dzien]="dzien"
+                           [selectedPodwieczorek]="selectedDanie?.podwieczorek">
+    </app-podwieczorek-form>
+
+  </mat-expansion-panel>
+
+  <!-- Kolacja -->
+  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Kolacja
+      </mat-panel-title>
+      <mat-panel-description>
+        Wstaw produkty dla Kolacji
+      </mat-panel-description>
+
+    </mat-expansion-panel-header>
+    <app-sniadanie [dzien]="dzien"
+                   [isKolacja]="true"
+                   [selectedSniadanie]="selectedDanie?.obiad">
+    </app-sniadanie>
+  </mat-expansion-panel>
+
+</mat-accordion>

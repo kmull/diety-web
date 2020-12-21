@@ -1,0 +1,95 @@
+{
+  "glowne": [
+    {
+      "id": 1,
+      "type": "zupa",
+      "name": "Makaron na mleku (450ml)"
+    },
+    {
+      "id": 2,
+      "type": "nabial",
+      "name": "twarożek Grani (200g)"
+    },
+    {
+      "id": 3,
+      "type": "zupa",
+      "name": "Ryż na mleku (450ml)"
+    },
+    {
+      "id": 4,
+      "type": "zupa",
+      "name": "Kasza manna na mleku (450ml)"
+    },
+    {
+      "id": 5,
+      "type": "zupa",
+      "name": "Kasza jęczmienna na mleku (450ml)"
+    }
+  ],
+  "pieczywo": [
+    {
+      "id": 1,
+      "type": "pieczywo",
+      "name": "Pieczywo z masłem"
+    },
+    {
+      "id": 2,
+      "type": "pieczywo",
+      "name": "Pieczywo z margaryną"
+    }
+  ],
+  "wedlina": [
+    {
+      "id": 1,
+      "type": "wedliny",
+      "name": "polędwica wieprzowa (70g)"
+    },
+    {
+      "id": 2,
+      "type": "wedliny",
+      "name": "baleron drobiowy (40g)"
+    },
+    {
+      "id": 3,
+      "type": "wedliny",
+      "name": "rolada drobiowa (40g)"
+    },
+    {
+      "id": 4,
+      "type": "wedliny",
+      "name": "krakowska parzona (70g)"
+    },
+    {
+      "id": 5,
+      "type": "wedliny",
+      "name": "szynka gotowana (60g)"
+    },
+    {
+      "id": 6,
+      "type": "wedliny",
+      "name": "szynka konserwowa (60g)"
+    }
+  ],
+  "warzywo": [
+    {
+      "id": 1,
+      "type": "warzywo",
+      "name": "papryka (30g)"
+    },
+    {
+      "id": 2,
+      "type": "warzywo",
+      "name": "rzodkiewka (30g)"
+    },
+    {
+      "id": 3,
+      "type": "warzywo",
+      "name": "pomidor (50g)"
+    },
+    {
+      "id": 4,
+      "type": "warzywo",
+      "name": "sałata (10g)"
+    }
+  ]
+}

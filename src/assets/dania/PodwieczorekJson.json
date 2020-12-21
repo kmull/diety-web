@@ -1,0 +1,40 @@
+{
+  "Podwieczorek": [
+    {
+      "id": 1,
+      "name": "Galaretka z owocami"
+    },
+    {
+      "id": 2,
+      "name": "Mandarynki"
+    },
+    {
+      "id": 3,
+      "name": "Budyń z wiśniami"
+    },
+    {
+      "id": 4,
+      "name": "Gruszka pieczona"
+    },
+    {
+      "id": 5,
+      "name": "Drożdżówka z dżemem"
+    },
+    {
+      "id": 6,
+      "name": "Amerykanka (oddz. 12A, 23, 11, 16)"
+    },
+    {
+      "id": 7,
+      "name": "Placki bananowe z dżemem"
+    },
+    {
+      "id": 8,
+      "name": "Drożdżówka z wiśniami"
+    },
+    {
+      "id": 9,
+      "name": "Kluski ze śmietaną i wiśniami"
+    }
+  ]
+}

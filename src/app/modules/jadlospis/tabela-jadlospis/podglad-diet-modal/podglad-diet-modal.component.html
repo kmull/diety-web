@@ -1,0 +1,52 @@
+<div *ngIf="dataSource?.length > 0">
+
+  <div class="example-container mat-elevation-z8">
+    <mat-table matTableExporter
+               [dataSource]="dataSource"
+               #exporter="matTableExporter">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="dzien">
+        <mat-header-cell *matHeaderCellDef> Dzień </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.dzien}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="sniadanie">
+        <mat-header-cell *matHeaderCellDef> Śniadanie </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.sniadanie}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="drugieSniadanie">
+        <mat-header-cell *matHeaderCellDef> Drugie śniadanie </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.drugieSniadanie}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="obiad">
+        <mat-header-cell *matHeaderCellDef> Obiad </mat-header-cell>
+        <mat-cell class="my-2"
+                  *matCellDef="let element"> {{element.obiad}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="podwieczorek">
+        <mat-header-cell *matHeaderCellDef> Podwieczorek </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.podwieczorek}} </mat-cell>
+      </ng-container>
+
+      <!-- Kolacja Column -->
+      <ng-container matColumnDef="kolacja">
+        <mat-header-cell *matHeaderCellDef> Kolacja </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.kolacja}} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"
+               (mouseout)="row.hovered = false">
+      </mat-row>
+    </mat-table>
+  </div>
+
+</div>

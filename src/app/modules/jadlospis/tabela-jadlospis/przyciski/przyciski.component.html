@@ -1,0 +1,72 @@
+<mat-card>
+  <mat-card-content>
+    <section class="example-section"
+             class="row justify-content-between">
+      <div class="col-9">
+
+      </div>
+
+      <div class="function-buttons col-3 no-gutters">
+
+        <mat-icon class="mat-24 icons-styles"
+                  matTooltip="Drukuj do EXCEL"
+                  color="primary"
+                  aria-label="Example icon-button with a heart icon"
+                  (click)="outDrukuj.emit()">
+          print
+        </mat-icon>
+
+        <mat-icon class="mat-24 icons-styles"
+                  matTooltip="Zapisz dane"
+                  color="warn"
+                  (click)="outOpenDialogZapisz.emit()"
+                  aria-label="Example icon-button with a heart icon">
+          save
+        </mat-icon>
+
+        <mat-icon class="mat-24 icons-styles"
+                  matTooltip="Załaduj dane"
+                  color="accent"
+                  (click)="outOpenDialogZapisaneDiety.emit()"
+                  aria-label="Example icon-button with a heart icon">
+          backup
+        </mat-icon>
+
+      </div>
+    </section>
+
+    <section>
+      <button mat-button
+              class="btn btn-dark mr-4"
+              (click)="outResetTable.emit()">
+        Resetuj tabelę
+      </button>
+
+      <button mat-button
+              class="btn btn-dark mr-4"
+              [disabled]="!selectedDania"
+              (click)="outResetRow.emit()">
+        Resetuj wiersz
+      </button>
+
+      <mat-form-field class="mx-4">
+        <mat-label>Posiłek</mat-label>
+        <mat-select [(ngModel)]="selectedResetDanieOption"
+                    name="dania">
+          <mat-option *ngFor="let item of resetDanieOptions;"
+                      [value]="item.value">
+            {{item.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button
+              class="btn btn-dark"
+              [disabled]="!selectedDania || !selectedResetDanieOption"
+              (click)="resetDanie()">
+        Resetuj Danie
+      </button>
+    </section>
+
+  </mat-card-content>
+</mat-card>

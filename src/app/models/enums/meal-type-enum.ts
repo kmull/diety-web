@@ -1,5 +1,6 @@
 export enum MealTypeEnum {
   DANIE_GLOWNE = 'DANIE_GLOWNE',
+  ZUPA_MLECZNA = 'ZUPA_MLECZNA',
   ZUPA = 'ZUPA',
   SUROWKA = 'SUROWKA',
   DODATKI = 'DODATKI',

@@ -14,7 +14,7 @@ import { MealTypeGeneralEnum } from '../../../../models/enums/meal-type-general-
   templateUrl: './obiad-form.component.html',
   styleUrls: ['./obiad-form.component.scss']
 })
-export class ObiadFormComponent implements OnInit, OnChanges {
+export class ObiadFormComponent implements OnChanges {
 
   @Input() dzien: string;
   @Input() selectedObiad: Obiad;
@@ -48,14 +48,10 @@ export class ObiadFormComponent implements OnInit, OnChanges {
 
   ) {
     this.obiadValues$.subscribe(values => {
-      this.soup = [...values.soup];
+      this.soup = [{ name: null }, ...values.soup];
       this.danieGlowne = [...values.dinner];
-      this.surowka = [...values.salad];
-      this.dodatki = [...values.additions];
-      // this.soup = [new Model(), ...values.soup];
-      // this.danieGlowne = [new Model(), ...values.dinner];
-      // this.surowka = [new Model(), ...values.salad];
-      // this.dodatki = [new Model(), ...values.additions];
+      this.surowka = [{ name: null }, ...values.salad];
+      this.dodatki = [{ name: null }, ...values.additions];
     });
 
     this.form = this.fb.group({
@@ -71,7 +67,6 @@ export class ObiadFormComponent implements OnInit, OnChanges {
     if (changes.dzien && this.dzien) {
       this.resetuj();
     }
-
     if (changes.selectedObiad && this.selectedObiad) {
       this.setObiadValues();
     }
@@ -83,8 +78,6 @@ export class ObiadFormComponent implements OnInit, OnChanges {
     this.form.get('dodatki').setValue(this.selectedObiad.dodatki);
     this.form.get('surowka').setValue(this.selectedObiad.surowka);
   }
-
-  ngOnInit(): void { }
 
   save() {
     this.buildForm();

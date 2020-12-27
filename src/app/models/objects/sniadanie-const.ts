@@ -1,10 +1,10 @@
 import { MealTypeEnum } from '../enums/meal-type-enum';
 
 export const SniadanieConst = [
-  { name: MealTypeEnum.DANIE_GLOWNE },
+  { name: MealTypeEnum.ZUPA_MLECZNA },
   { name: MealTypeEnum.PIECZYWO },
   { name: MealTypeEnum.WEDLINA },
-  { name: MealTypeEnum.NAPOJ },
+  { name: MealTypeEnum.NABIAL },
   { name: MealTypeEnum.WARZYWO },
-  { name: MealTypeEnum.NABIAL }
+  { name: MealTypeEnum.NAPOJ }
 ];

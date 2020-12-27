@@ -1,7 +1,13 @@
 <mat-accordion class="example-headers-align"
-               [multi]="true">
+               [multi]="false">
   <!-- Drugie śniadanie -->
-  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
+  <mat-expansion-panel [expanded]="!!panelStateSniadanie"
+                       (opened)="panelStateSniadanie = true"
+                       (closed)="panelStateSniadanie = false"
+                       [disabled]="
+                       !dzien
+                       ||
+                       index===TYPY_DIET_INDEX.STOLOWKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Śniadanie
@@ -17,7 +23,10 @@
   </mat-expansion-panel>
 
   <!-- Drugie śniadanie -->
-  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.PODSTAWOWA || index === TYPY_DIET_INDEX.STOLOWKA
+  <mat-expansion-panel [expanded]="!!panelStateDrugieSniadanie"
+                       (opened)="panelStateDrugieSniadanie = true"
+                       (closed)="panelStateDrugieSniadanie = false"
+                       [disabled]="!dzien || index === TYPY_DIET_INDEX.PODSTAWOWA || index === TYPY_DIET_INDEX.STOLOWKA
   || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.WEGETARIANSKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -35,7 +44,10 @@
   </mat-expansion-panel>
 
   <!-- Obiad -->
-  <mat-expansion-panel [disabled]="!dzien">
+  <mat-expansion-panel [expanded]="!!panelStateObiad"
+                       (opened)="panelStateObiad = true"
+                       (closed)="panelStateObiad = false"
+                       [disabled]="!dzien">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Obiad
@@ -52,7 +64,10 @@
   </mat-expansion-panel>
 
   <!-- Podwieczorek -->
-  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.LEKKOSTRAWNA
+  <mat-expansion-panel [expanded]="!!panelStatePodwieczorek"
+                       (opened)="panelStatePodwieczorek = true"
+                       (closed)="panelStatePodwieczorek = false"
+                       [disabled]="!dzien || index === TYPY_DIET_INDEX.BEZ_LAKTOZY || index === TYPY_DIET_INDEX.LEKKOSTRAWNA
   || index === TYPY_DIET_INDEX.STOLOWKA || index === TYPY_DIET_INDEX.WEGETARIANSKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
@@ -70,7 +85,10 @@
   </mat-expansion-panel>
 
   <!-- Kolacja -->
-  <mat-expansion-panel [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
+  <mat-expansion-panel [expanded]="!!panelStateKolacja"
+                       (opened)="panelStateKolacja = true"
+                       (closed)="panelStateKolacja = false"
+                       [disabled]="!dzien || index === TYPY_DIET_INDEX.STOLOWKA">
     <mat-expansion-panel-header>
       <mat-panel-title>
         Kolacja

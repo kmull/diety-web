@@ -8,7 +8,8 @@ mat-row {
 
 mat-header-row {
   // background-color: #808283;
-  background-color: #cfad31;
+  // background-color: #cfad31;
+  background-color: cadetblue;
 
   color: white;
 }
@@ -22,3 +23,21 @@ h3 {
   color: black;
   font-size: 14px;
 }
+
+.mat-tab-header,
+.tab-header {
+  background-color: mediumorchid !important;
+  color: pink !important;
+}
+
+/* active tab */
+::ng-deep .mat-tab-list {
+  // color: red;
+  background-color: darkcyan;
+}
+
+// /* active tab */
+// ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
+//   color: red;
+//   background-color: green;
+// }

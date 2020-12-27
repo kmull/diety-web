@@ -63,15 +63,14 @@ export class ZapisaneDietyModalComponent implements OnInit {
     row.dane.forEach(f => {
       this.selectedDaneList.push(f);
     });
-    console.log('selectedDieta', this.selectedDieta);
   }
 
   onSave(): void {
-    this.onCancel();
+    this.dialogRef.close(this.selectedDieta);
   }
 
   onCancel(): void {
-    this.dialogRef.close(this.selectedDieta);
+    this.dialogRef.close();
   }
 
   onDelete(): void {
@@ -79,7 +78,9 @@ export class ZapisaneDietyModalComponent implements OnInit {
       .pipe(
         switchMap(() => this.dietaService.loadAllDiety()
           .pipe(
-            tap(dietaList => this.dataSource.data = dietaList)
+            tap(dietaList => {
+              this.dataSource.data = dietaList;
+            })
           )
         )).subscribe(() => this.selectedDieta = null);
   }

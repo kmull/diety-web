@@ -7,16 +7,20 @@
                (outOpenDialogZapisaneDiety)="openDialogZapisaneDiety()">
 </app-przyciski>
 
-<mat-tab-group [color]="'warn'"
-               [backgroundColor]="'accent'"
+<!-- [color]="'warn'"
+[backgroundColor]="'accent'" -->
+<mat-tab-group class="mb-2"
+               [color]="'warn'"
                (selectedIndexChange)="onSelectedIndexChange($event)">
+
   <mat-tab [label]="TYPY_DIET_NAZWY.PODSTAWOWA">
     <app-table-view #podstawowatable
                     [index]="0"
                     [dania]="daniaList[0]"
                     [displayedColumns]="DISPLAY_PODSTAWOWA"
                     [dataSource]="dataSourceList[0]"
-                    (outRecord)="rowSelected($event)">
+                    (outRecord)="rowSelected($event)"
+                    (outData)="ontableChanged($event)">
     </app-table-view>
   </mat-tab>
 
@@ -26,7 +30,8 @@
                     [dania]="daniaList[1]"
                     [displayedColumns]="DISPLAY_BEZ_LAKTOZY"
                     [dataSource]="dataSourceList[1]"
-                    (outRecord)="rowSelected($event)">
+                    (outRecord)="rowSelected($event)"
+                    (outData)="ontableChanged($event)">
     </app-table-view>
   </mat-tab>
 
@@ -36,7 +41,8 @@
                     [dania]="daniaList[2]"
                     [displayedColumns]="DISPLAY_LEKKOSTRAWNA"
                     [dataSource]="dataSourceList[2]"
-                    (outRecord)="rowSelected($event)">
+                    (outRecord)="rowSelected($event)"
+                    (outData)="ontableChanged($event)">
     </app-table-view>
   </mat-tab>
 
@@ -46,7 +52,8 @@
                     [dania]="daniaList[3]"
                     [displayedColumns]="DISPLAY_WEGETARIANSKA"
                     [dataSource]="dataSourceList[3]"
-                    (outRecord)="rowSelected($event)">
+                    (outRecord)="rowSelected($event)"
+                    (outData)="ontableChanged($event)">
     </app-table-view>
   </mat-tab>
 
@@ -56,7 +63,8 @@
                     [dania]="daniaList[4]"
                     [displayedColumns]="DISPLAY_STOLOWKA"
                     [dataSource]="dataSourceList[4]"
-                    (outRecord)="rowSelected($event)">
+                    (outRecord)="rowSelected($event)"
+                    (outData)="ontableChanged($event)">
     </app-table-view>
   </mat-tab>
 

@@ -16,7 +16,7 @@ import { TypyDiet } from 'src/app/models/typy-diet';
 import { TableViewComponent } from './table-view/table-view.component';
 import * as XLSX from "xlsx";
 import * as cloneDeep from 'lodash/cloneDeep';
-import { DaniaList } from 'src/app/models/dania-list';
+import { TableUtil } from 'src/app/shared/utils/table-utils';
 
 @Component({
   selector: 'app-tabela-jadlospis',
@@ -44,7 +44,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   selectedDania: DaniaAll;
   dieta: Dieta;
 
-
   TYPY_DIET_NAZWY = TypyDietNazwy;
   typyDiet: TypyDiet[] = []
 
@@ -66,7 +65,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     cloneDeep(ELEMENT_DATA)
   ];
 
-  // daniaList = new DaniaList();
   daniaList = [
     cloneDeep(DANIA_ALL),
     cloneDeep(DANIA_ALL),
@@ -89,20 +87,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.dieta = new Dieta();
-    // this.daniaList.daniaList = [];
-    // this.daniaList.daniaList.push(cloneDeep(DANIA_ALL));
-    // this.daniaList.daniaList.push(cloneDeep(DANIA_ALL));
-    // this.daniaList.daniaList.push(cloneDeep(DANIA_ALL));
-    // this.daniaList.daniaList.push(cloneDeep(DANIA_ALL));
-    // this.daniaList.daniaList.push(cloneDeep(DANIA_ALL));
-
-    // daniaList: DaniaList[] = [
-    //   cloneDeep(DANIA_ALL),
-    //   cloneDeep(DANIA_ALL),
-    //   cloneDeep(DANIA_ALL),
-    //   cloneDeep(DANIA_ALL),
-    //   cloneDeep(DANIA_ALL)
-    // ];
     this.typyDiet.push(new TypyDiet(this.TYPY_DIET_NAZWY.PODSTAWOWA, DANIA_ALL))
     this.typyDiet.push(new TypyDiet(this.TYPY_DIET_NAZWY.BEZ_LAKTOZY, DANIA_ALL))
     this.typyDiet.push(new TypyDiet(this.TYPY_DIET_NAZWY.LEKKOSTRAWNA, DANIA_ALL))
@@ -115,15 +99,17 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
           if (!!danie && !!danie.rodzajDania && !!danie.danie) {
             const index = this.dataSourceList[this.index].findIndex(i => i.dzien === this.dzien);
             this.daniaList[this.index][index][danie.rodzajDania] = danie.danie;
+            console.log('this.daniaList', this.daniaList)
+
+            this.typyDiet[this.index].dieta = cloneDeep(this.daniaList[this.index]);
+            console.log('this.typyDiet', this.typyDiet)
+
             this.dataSourceList[this.index][index][danie.rodzajDania] = this.mapDanieToString(danie.danie);
-            this.dataSourceList = cloneDeep(this.dataSourceList);
-            this.daniaList = cloneDeep(this.daniaList);
+            this.refreshData();
           }
         })
       )
-      .subscribe(() => {
-        this.cdr.markForCheck()
-      });
+      .subscribe();
   }
 
   private mapDanieToString(danie): string {
@@ -151,12 +137,19 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
   openDialogZapisz(): void {
     const dialogRef = this.dialog.open(ZapiszModalComponent, {
       width: '300px',
-      data: ''
+      data: this.dieta
     });
 
     dialogRef.afterClosed().subscribe(dieta => {
       if (dieta) {
         this.dieta = dieta;
+        // console.log('this.dieta', this.dieta);
+        console.log('this.typyDiet', this.typyDiet);
+        // dane.forEach(k => {
+        //   const daniaList: TypyDiet = JSON.parse(k);
+        //   this.typyDiet[index].dieta = cloneDeep(daniaList.dieta);
+        //   this.daniaList.push(cloneDeep(daniaList.dieta));
+
         this.dieta.dane = [
           JSON.stringify(this.typyDiet[0]),
           JSON.stringify(this.typyDiet[1]),
@@ -171,10 +164,9 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
 
   openDialogZapisaneDiety(): void {
     this.dietaService.loadAllDiety().subscribe(dietaList => {
+      // console.log('dietaList', dietaList);
       const dialogRef = this.dialog.open(ZapisaneDietyModalComponent, {
-        // width: '1300px',
-        // height: '700px',
-        maxWidth: '98vw',
+        maxWidth: '95vw',
         maxHeight: '95vh',
         height: '95%',
         width: '95%',
@@ -182,7 +174,15 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((dieta: Dieta) => {
         if (dieta) {
+          console.log('dieta', dieta);
+          this.dieta = dieta;
           this.mapLoadedDiet(dieta.dane);
+          this.daniaList = cloneDeep(this.daniaList);
+          this.dataSourceList = cloneDeep(this.dataSourceList);
+
+          this.typyDiet = cloneDeep(this.typyDiet);
+          this.dataSourceList[this.index] = this.mapDaniaToDatasource(this.daniaList[this.index]);
+          this.refreshData();
         }
       });
     });
@@ -222,9 +222,8 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       index++;
     });
     index = 0;
-    this.dataSourceList = dataSourceList.slice();
-    this.daniaList = this.daniaList.slice();
-    this.cdr.markForCheck();
+    this.dataSourceList = dataSourceList;
+    this.refreshData();
   }
 
   onResetTable(): void {
@@ -242,11 +241,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       row.podwieczorek = null;
       row.kolacja = null;
     })
-
-    this.dataSourceList = cloneDeep(this.dataSourceList);
-    this.daniaList = cloneDeep(this.daniaList);
-    this.cdr.markForCheck();
-    this.cdr.markForCheck();
+    this.refreshData();
   }
 
   onResetRow(): void {
@@ -262,20 +257,14 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     this.daniaList[this.index][index].obiad = null;
     this.daniaList[this.index][index].podwieczorek = null;
     this.daniaList[this.index][index].kolacja = null;
-
-    this.dataSourceList = cloneDeep(this.dataSourceList);
-    this.daniaList = cloneDeep(this.daniaList);
-    this.cdr.markForCheck();
+    this.refreshData();
   }
 
   onResetDanie(selectedResetDanieOption: string): void {
     const index = this.dataSourceList[this.index].findIndex(f => f.dzien === this.selectedDania.dzien);
     this.dataSourceList[this.index][index][selectedResetDanieOption] = null;
     this.daniaList[this.index][index][selectedResetDanieOption] = null;
-
-    this.dataSourceList = cloneDeep(this.dataSourceList);
-    this.daniaList = cloneDeep(this.daniaList);
-    this.cdr.markForCheck();
+    this.refreshData();
   }
 
   onSelectedIndexChange(index: number): void {
@@ -291,41 +280,12 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     this.daniaList[this.index] = this.typyDiet[this.index].dieta;
     this.dataSourceList[this.index] = this.mapDaniaToDatasource(this.daniaList[this.index]);
 
-    this.dataSourceList = cloneDeep(this.dataSourceList);
-    this.daniaList = cloneDeep(this.daniaList);
-    this.cdr.markForCheck();
-  }
-
-  onDrukuj(): void {
-    let ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
-      this.podstawowatable.table.nativeElement
-    );
-    let wb: XLSX.WorkBook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.PODSTAWOWA);
-    // -----------------------------------------------------
-    ws = XLSX.utils.table_to_sheet(
-      this.bezLaktozyTable.table.nativeElement
-    );
-    XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.BEZ_LAKTOZY);
-    // // -----------------------------------------------------
-    ws = XLSX.utils.table_to_sheet(
-      this.lekkostrawnaTable.table.nativeElement
-    );
-    XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.LEKKOSTRAWNA);
-    // // -----------------------------------------------------
-    ws = XLSX.utils.table_to_sheet(
-      this.wegetarianskaTable.table.nativeElement
-    );
-    XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.WEGETARIANSKA);
-    // // -----------------------------------------------------
-    ws = XLSX.utils.table_to_sheet(
-      this.stolowkaTable.table.nativeElement
-    );
-    XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.STOLOWKA);
-    // -----------------------------------------------------
-
-    /* save to file */
-    XLSX.writeFile(wb, 'Diety.xlsx');
+    this.podstawowatable.selectedRowIndex = null;
+    this.bezLaktozyTable.selectedRowIndex = null;
+    this.lekkostrawnaTable.selectedRowIndex = null;
+    this.wegetarianskaTable.selectedRowIndex = null;
+    this.stolowkaTable.selectedRowIndex = null;
+    this.refreshData();
   }
 
   private mapDaniaToDatasource(dania: DaniaAll[]): JadlospisModel[] {
@@ -333,7 +293,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     dania.forEach(f => {
       jadlospisAll.push(this.formatDania(f));
     })
-    // }
     return jadlospisAll;
   }
 
@@ -346,6 +305,74 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     jadlospis.podwieczorek = !!daniaAll.podwieczorek ? this.mapDanieToString(daniaAll.podwieczorek) : null;
     jadlospis.kolacja = !!daniaAll.kolacja ? this.mapDanieToString(daniaAll.kolacja) : null;
     return jadlospis;
+  }
+
+  ontableChanged(data: { datasource: JadlospisModel[], dania: DaniaAll[], index: number }): void {
+    this.dataSourceList[data.index] = data.datasource;
+    this.daniaList[data.index] = data.dania;
+
+    this.daniaList = cloneDeep(this.daniaList);
+    this.dataSourceList = cloneDeep(this.dataSourceList);
+    this.refreshData();
+  }
+
+  private refreshData(): void {
+    this.dataSourceList = cloneDeep(this.dataSourceList);
+    this.daniaList = cloneDeep(this.daniaList);
+    this.cdr.markForCheck();
+  }
+
+  onDrukuj(): void {
+    // console.log('this.dataSourceList', this.dataSourceList);
+    // console.log('this.daniaList', this.daniaList);
+
+    // console.log('this.podstawowatable', this.podstawowatable);
+    // console.log('this.podstawowatable.table', this.podstawowatable.table);
+
+    // TableUtil.exportArrayToExcel(this.daniaList, "ExampleArray");
+
+    this.podstawowatable.exporter.exportTable('xlsx', { fileName: this.TYPY_DIET_NAZWY.PODSTAWOWA, sheet: this.TYPY_DIET_NAZWY.PODSTAWOWA, Props: { Author: 'KM' } });
+    this.bezLaktozyTable.exporter.exportTable('xlsx', { fileName: this.TYPY_DIET_NAZWY.BEZ_LAKTOZY, sheet: this.TYPY_DIET_NAZWY.BEZ_LAKTOZY, Props: { Author: 'KM' } });
+    this.lekkostrawnaTable.exporter.exportTable('xlsx', { fileName: this.TYPY_DIET_NAZWY.LEKKOSTRAWNA, sheet: this.TYPY_DIET_NAZWY.LEKKOSTRAWNA, Props: { Author: 'KM' } });
+    this.wegetarianskaTable.exporter.exportTable('xlsx', { fileName: this.TYPY_DIET_NAZWY.WEGETARIANSKA, sheet: this.TYPY_DIET_NAZWY.WEGETARIANSKA, Props: { Author: 'KM' } });
+    this.stolowkaTable.exporter.exportTable('xlsx', { fileName: this.TYPY_DIET_NAZWY.STOLOWKA, sheet: this.TYPY_DIET_NAZWY.STOLOWKA, Props: { Author: 'KM' } });
+    // this.bezLaktozyTable.exporter.exportTable('xlsx', this.TYPY_DIET_NAZWY.BEZ_LAKTOZY);
+    // this.lekkostrawnaTable.exporter.exportTable('xlsx', this.TYPY_DIET_NAZWY.LEKKOSTRAWNA);
+    // this.wegetarianskaTable.exporter.exportTable('xlsx', this.TYPY_DIET_NAZWY.WEGETARIANSKA);
+    // this.stolowkaTable.exporter.exportTable('xlsx', this.TYPY_DIET_NAZWY.STOLOWKA);
+
+
+    // <button mat - raised - button(click)="exporter.exportTable('xlsx', {fileName:'test', sheet: 'sheet_name', Props: {Author: 'Talha'}})" > Excel < /button>
+
+    // let ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(
+    //   this.podstawowatable.table.nativeElement
+    // );
+    // let wb: XLSX.WorkBook = XLSX.utils.book_new();
+    // XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.PODSTAWOWA);
+    // -----------------------------------------------------
+    // ws = XLSX.utils.table_to_sheet(
+    //   this.bezLaktozyTable.table.nativeElement
+    // );
+    // XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.BEZ_LAKTOZY);
+    // // // -----------------------------------------------------
+    // ws = XLSX.utils.table_to_sheet(
+    //   this.lekkostrawnaTable.table.nativeElement
+    // );
+    // XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.LEKKOSTRAWNA);
+    // // // -----------------------------------------------------
+    // ws = XLSX.utils.table_to_sheet(
+    //   this.wegetarianskaTable.table.nativeElement
+    // );
+    // XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.WEGETARIANSKA);
+    // // // -----------------------------------------------------
+    // ws = XLSX.utils.table_to_sheet(
+    //   this.stolowkaTable.table.nativeElement
+    // );
+    // XLSX.utils.book_append_sheet(wb, ws, TypyDietNazwy.STOLOWKA);
+    // // -----------------------------------------------------
+
+    /* save to file */
+    // XLSX.writeFile(wb, 'Diety.xlsx');
   }
 
 }

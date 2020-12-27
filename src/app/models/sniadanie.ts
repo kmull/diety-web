@@ -3,7 +3,7 @@ export class Sniadanie {
   glowne?: string;
   pieczywo?: string;
   wedlina?: string;
-  warzywo?: string;
   nabial?: string;
+  warzywo?: string;
   napoj?: string;
 }

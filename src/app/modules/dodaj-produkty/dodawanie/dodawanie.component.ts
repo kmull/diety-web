@@ -6,6 +6,7 @@ import { MealDinnerService } from '../../services/meal-dinner.service';
 import { Model } from '../../../models/model';
 import { RodzajDaniaEnum } from '../../../models/enums/rodzaj-dania-enum';
 import { SniadanieConst } from '../../../models/objects/sniadanie-const';
+import { MealTypeEnum } from 'src/app/models/enums/meal-type-enum';
 
 @Component({
   selector: 'app-dodawanie',
@@ -64,7 +65,7 @@ export class DodawanieComponent implements OnInit {
   }
 
   changeType(type) {
-    this.selectedType = type;
+    this.selectedType = type === MealTypeEnum.ZUPA_MLECZNA ? MealTypeEnum.DANIE_GLOWNE : type;
   }
 
   onSave() {
@@ -73,7 +74,6 @@ export class DodawanieComponent implements OnInit {
       this.mealDinnerService
         .saveMeal(this.selectedMealType, this.selectedType, this.meal)
         .subscribe(() => {
-          // this.selectedType = null;
           this.meal = new Model();
           this.form.reset();
         });

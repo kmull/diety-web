@@ -1,9 +1,12 @@
-<div class="mt-3" [formGroup]="form">
+<div class="mt-3"
+     [formGroup]="form">
 
   <mat-form-field class="col-4">
     <mat-label>Typ dania</mat-label>
     <mat-select>
-      <mat-option *ngFor="let item of mealTypeOption" [value]="item.name" (click)="changeMealtype(item.name)">
+      <mat-option *ngFor="let item of mealTypeOption"
+                  [value]="item.name"
+                  (click)="changeMealtype(item.name)">
         {{item.name}}
       </mat-option>
     </mat-select>
@@ -11,8 +14,10 @@
 
   <mat-form-field class="col-4">
     <mat-label>Typ składnika</mat-label>
-    <mat-select [disabled]="!selectedMealType && selectedMealType !== rodzajDaniaEnum.DRUGIE_SNIADANIE">
-      <mat-option *ngFor="let item of typeOptions" [value]="item.name" (click)="changeType(item.name)">
+    <mat-select [disabled]="!selectedMealType || selectedMealType === rodzajDaniaEnum.DRUGIE_SNIADANIE">
+      <mat-option *ngFor="let item of typeOptions"
+                  [value]="item.name"
+                  (click)="changeType(item.name)">
         {{item.name}}
       </mat-option>
     </mat-select>
@@ -21,18 +26,33 @@
   <mat-form-field class="col-4">
     <mat-label>Edytowany składnik</mat-label>
     <mat-select formControlName="skladnik">
-      <mat-option *ngFor="let item of modelList" [value]="item.name" (click)="changeModel(item)">
+      <mat-option *ngFor="let item of modelList"
+                  [value]="item.name"
+                  (click)="changeModel(item)">
         {{item.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <div class="col-6">
-    <input formControlName="name" matInput type="text" class="col-6" [placeholder]="'Wartość do zmiany'">
+    <input formControlName="name"
+           matInput
+           type="text"
+           class="col-6"
+           [placeholder]="'Wartość do zmiany'">
   </div>
 
 </div>
 <div class="my-3">
-  <button mat-raised-button color="zapisz" class="mx-4" (click)="onSave()">Zapisz</button>
-  <button mat-raised-button color="resetuj" (click)="onRemove()">Usuń</button>
+  <button mat-raised-button
+          color="zapisz"
+          class="mx-4"
+          (click)="onSave()">
+    Zapisz
+  </button>
+  <button mat-raised-button
+          color="resetuj"
+          (click)="onRemove()">
+    Usuń
+  </button>
 </div>

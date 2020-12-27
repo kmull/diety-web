@@ -31,6 +31,7 @@ import { TableViewComponent } from './tabela-jadlospis/table-view/table-view.com
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTabsModule,
     MatButtonToggleModule,
     MatNativeDateModule,
+    DragDropModule,
     JadlospisRoutingModule
   ]
 })

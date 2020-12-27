@@ -46,9 +46,9 @@ export class DrugieSniadanieFormComponent {
     private fb: FormBuilder,
     private posilekService: PosilekService,
     private mealDinnerService: MealDinnerService
-
   ) {
-    this.podwieczorekValues$.subscribe(drugieSniadanie => this.drugieSniadanieModel = drugieSniadanie);
+    this.podwieczorekValues$
+      .subscribe(drugieSniadanie => this.drugieSniadanieModel = [{ name: null }, ...drugieSniadanie]);
 
     this.form = this.fb.group({
       drugieSniadanie: ['']

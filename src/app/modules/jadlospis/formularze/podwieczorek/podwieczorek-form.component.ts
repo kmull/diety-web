@@ -29,7 +29,7 @@ export class PodwieczorekFormComponent implements OnInit, OnChanges {
     private mealDinnerService: MealDinnerService
 
   ) {
-    this.podwieczorekValues$.subscribe(podwieczorek => this.podwieczorekModel = podwieczorek);
+    this.podwieczorekValues$.subscribe(podwieczorek => this.podwieczorekModel = [{ name: null }, ...podwieczorek]);
 
     this.form = this.fb.group({
       podwieczorek: ['']

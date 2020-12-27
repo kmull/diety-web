@@ -2,6 +2,7 @@ import { DaniaAll } from './../../../../models/dania-all';
 import { Component, Input } from '@angular/core';
 import { JadlospisModel } from 'src/app/models/jadlospis-model';
 import { MapDietyUtil } from 'src/app/shared/utils/map-diet-util';
+import { RodzajDaniaOpis } from 'src/app/models/enums/rodzaj-dania-enum';
 
 @Component({
   selector: 'app-podglad-diet-modal',
@@ -18,23 +19,9 @@ export class PodgladDietModalComponent {
     this._dieta = value;
 
     this.dataSource = !!this.dieta ? MapDietyUtil.mapDiety(JSON.parse(this.dieta).dieta) : [];
-    // this.dataSource = !!this.dieta ? MapDietyUtil.mapDiety(this.dieta) : [];
   }
 
   @Input() displayedColumns = [];
-  // @Input() displayedColumns = ['dzien', 'sniadanie', 'drugieSniadanie', 'obiad', 'podwieczorek', 'kolacja'];
   dataSource: JadlospisModel[];
-
-  // private _dieta: JadlospisModel[];
-  // @Input() public get dieta(): JadlospisModel[] {
-  //   return this._dieta;
-  // }
-  // public set dieta(value: JadlospisModel[]) {
-  //   this._dieta = value;
-  //   this.dataSource = !!this.dieta ? MapDietyUtil.mapDiety(this.dieta) : [];
-  // }
-
-  // displayedColumns = ['dzien', 'sniadanie', 'drugieSniadanie', 'obiad', 'podwieczorek', 'kolacja'];
-  // dataSource: JadlospisModel[];
-
+  rodzajDaniaOpis = RodzajDaniaOpis;
 }

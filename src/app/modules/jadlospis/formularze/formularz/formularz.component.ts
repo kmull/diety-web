@@ -20,9 +20,11 @@ export class FormularzComponent implements OnInit {
   }
 
   public set index(value: number) {
-    if (!value && !!this.accordion) {
-      this.accordion.closeAll();
-    }
+    this.panelStateSniadanie = false
+    this.panelStateDrugieSniadanie = false;
+    this.panelStateObiad = false;
+    this.panelStatePodwieczorek = false;
+    this.panelStateKolacja = false;
     this._index = value;
   }
 
@@ -39,12 +41,17 @@ export class FormularzComponent implements OnInit {
   }
 
   TYPY_DIET_INDEX = TypyDietIndex;
-  panelOpenState = false;
+  panelStateSniadanie = false;
+  panelStateDrugieSniadanie = false;
+  panelStateObiad = false;
+  panelStatePodwieczorek = false;
+  panelStateKolacja = false;
+
+
   constructor() { }
 
   ngOnInit(): void { }
 
-  save() { }
 
 }
 

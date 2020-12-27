@@ -18,15 +18,15 @@ export class ZapiszModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<ZapiszModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public name: string
+    @Inject(MAT_DIALOG_DATA) public dietaLoaded: Dieta
   ) { }
 
   ngOnInit(): void {
     this.dieta = new Dieta();
     this.dieta.date = new Date();
-    if (!!this.name) {
-      this.dieta.name = this.name;
-      this.form.get('name').setValue(this.name);
+    if (this.dietaLoaded && !!this.dietaLoaded.name) {
+      this.dieta.name = this.dietaLoaded.name;
+      this.form.get('name').setValue(this.dietaLoaded.name);
     }
   }
 
@@ -36,6 +36,13 @@ export class ZapiszModalComponent implements OnInit {
 
   onSave(): void {
     this.dieta.name = this.form.get('name').value;
+    if (!!this.dietaLoaded && !!this.dietaLoaded.name && this.dieta.name === this.dietaLoaded.name) {
+      this.dieta.id = this.dietaLoaded.id;
+    } else {
+      this.dieta = new Dieta();
+      this.dieta.name = this.form.get('name').value;
+    }
+    this.dieta.date = new Date();
     this.dialogRef.close(this.dieta);
   }
 

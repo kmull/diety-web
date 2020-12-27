@@ -50,20 +50,20 @@ export class SniadanieComponent implements OnInit, OnChanges {
     private mealDinnerService: MealDinnerService
   ) {
     this.sniadanieValues$.subscribe(values => {
-      this.glowne = values.mainMeal;
-      this.napoj = values.drink;
-      this.pieczywo = values.bread;
-      this.warzywo = values.vegetable;
-      this.wedlina = values.sausage;
-      this.nabial = values.dairy;
+      this.glowne = [{ name: null }, ...values.mainMeal];
+      this.napoj = [{ name: null }, ...values.drink];
+      this.pieczywo = [{ name: null }, ...values.bread];
+      this.warzywo = [{ name: null }, ...values.vegetable];
+      this.wedlina = [{ name: null }, ...values.sausage];
+      this.nabial = [{ name: null }, ...values.dairy];
     });
 
     this.form = this.fb.group({
-      glowne: ['', Validators.required],
+      glowne: [''],
       pieczywo: [''],
       wedlina: [''],
-      warzywo: [''],
       nabial: [''],
+      warzywo: [''],
       napoj: ['']
     });
   }
@@ -84,8 +84,8 @@ export class SniadanieComponent implements OnInit, OnChanges {
     this.form.get('glowne').setValue(this.selectedSniadanie.glowne);
     this.form.get('pieczywo').setValue(this.selectedSniadanie.pieczywo);
     this.form.get('wedlina').setValue(this.selectedSniadanie.wedlina);
-    this.form.get('warzywo').setValue(this.selectedSniadanie.warzywo);
     this.form.get('nabial').setValue(this.selectedSniadanie.nabial);
+    this.form.get('warzywo').setValue(this.selectedSniadanie.warzywo);
     this.form.get('napoj').setValue(this.selectedSniadanie.napoj);
   }
 
@@ -99,9 +99,9 @@ export class SniadanieComponent implements OnInit, OnChanges {
     this.sniadanie.dzien = this.dzien;
     this.sniadanie.glowne = this.form.get('glowne').value;
     this.sniadanie.pieczywo = this.form.get('pieczywo').value;
-    this.sniadanie.warzywo = this.form.get('warzywo').value;
     this.sniadanie.wedlina = this.form.get('wedlina').value;
     this.sniadanie.nabial = this.form.get('nabial').value;
+    this.sniadanie.warzywo = this.form.get('warzywo').value;
     this.sniadanie.napoj = this.form.get('napoj').value;
   }
 

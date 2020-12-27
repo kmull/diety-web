@@ -38,9 +38,14 @@ mat-header-cell.mat-header-cell {
 }
 
 .mat-expansion-panel-header {
-  // background-color: gainsboro;
+  background-color: darkgray;
   // background-color: #7986cb;
-  background-color: darkslategray;
+  // background-color: darkslategray;
+  // background-color: darkslategray;
+}
+
+.mat-expansion-panel-header:not(active) {
+  color: darkslategray !important;
 }
 
 .mat-table {
@@ -54,13 +59,16 @@ mat-header-cell.mat-header-cell {
   // background-color: darkgoldenrod !important;
   // background-color: lavender !important;
   // background-color: #7986cb !important;
-  background-color: darkslategray !important;
+  // background-color: darkslategray !important;
+  // background-color: dimgray !important;
+  background-color: rgb(141, 138, 138) !important;
 }
 
 .mat-expansion-panel-body {
   // padding: 0 24px 16px;
   // background-color: gold;
   // background-color: #9fa8da;
+  // background-color: cadetblue;
   background-color: cadetblue;
 }
 
@@ -68,7 +76,8 @@ mat-header-cell.mat-header-cell {
   margin: 0, 20px;
   // background-color: cadetblue;
   // background-color: limegreen;
-  background-color: #28a745;
+  // background-color: #28a745;
+  background-color: mediumblue;
   ;
   color: white;
   font-weight: 700;

@@ -210,7 +210,7 @@ export class EdytowanieComponent implements OnInit {
       case MealTypeEnum.PIECZYWO:
         this.modelList = this.pieczywo;
         break;
-      case MealTypeEnum.DANIE_GLOWNE:
+      case MealTypeEnum.ZUPA_MLECZNA || MealTypeEnum.DANIE_GLOWNE:
         this.modelList = this.sniadanieGlowne;
         break;
       case MealTypeEnum.NABIAL:
@@ -233,11 +233,13 @@ export class EdytowanieComponent implements OnInit {
   onSave(): void {
     this.meal.name = this.form.get('name').value;
     if (!!this.meal.name && !!this.selectedType) {
-      this.mealDinnerService.saveMeal(this.selectedMealType, this.selectedType, this.meal)
+      this.mealDinnerService.saveMeal(this.selectedMealType, this.selectedType === MealTypeEnum.ZUPA_MLECZNA
+        ? MealTypeEnum.DANIE_GLOWNE : this.selectedType, this.meal)
         .subscribe(() => {
           this.modelList = this.modelList.slice();
           this.meal = new Model();
-          this.mealDinnerService.getDinner(this.selectedMealType, this.selectedType)
+          this.mealDinnerService.getDinner(this.selectedMealType, this.selectedType === MealTypeEnum.ZUPA_MLECZNA
+            ? MealTypeEnum.DANIE_GLOWNE : this.selectedType)
             .subscribe(dishes => this.modelList = dishes);
           this.selectedType = null;
           this.form.reset();
@@ -251,7 +253,8 @@ export class EdytowanieComponent implements OnInit {
         .subscribe(() => {
           this.changeMealtype(this.selectedMealType);
           this.modelList = this.modelList.filter(f => f.id !== this.meal.id).slice();
-          this.mealDinnerService.getDinner(this.selectedMealType, this.selectedType)
+          this.mealDinnerService.getDinner(this.selectedMealType, this.selectedType === MealTypeEnum.ZUPA_MLECZNA
+            ? MealTypeEnum.DANIE_GLOWNE : this.selectedType)
             .subscribe(dishes => this.modelList = dishes);
           this.meal = new Model();
           this.form.reset();

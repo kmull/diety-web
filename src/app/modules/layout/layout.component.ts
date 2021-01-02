@@ -18,8 +18,6 @@ export class LayoutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // this.isLoggedIn = this.authenticationService.isUserLoggedIn();
-    // console.log('menu ->' + this.isLoggedIn);
     this.authenticationService.setLoginStatus(this.authenticationService.isUserLoggedIn())
 
     this.authenticationService.getLoginStatus().subscribe(status => this.isLoggedIn = status);
@@ -32,7 +30,6 @@ export class LayoutComponent implements OnInit {
   handleLogin() {
     setTimeout(() => {
       this.isLoggedIn = this.authenticationService.isUserLoggedIn();
-      console.log('this.isLoggedIn', this.isLoggedIn)
     }, 100);
   }
 }

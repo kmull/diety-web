@@ -19,19 +19,10 @@ body {
   background: #eee;
 }
 
-.mat-row.highlighted {
-  // background: #999;
-}
-
 .highlighted {
-  // background: #999;
   background: #efebe9;
 }
 
-/*
-  This is a work around for checkbox bug in material row
-  https://github.com/angular/material2/issues/8600
-*/
 mat-cell.mat-cell,
 mat-header-cell.mat-header-cell {
   overflow: visible;
@@ -39,9 +30,6 @@ mat-header-cell.mat-header-cell {
 
 .mat-expansion-panel-header {
   background-color: darkgray;
-  // background-color: #7986cb;
-  // background-color: darkslategray;
-  // background-color: darkslategray;
 }
 
 .mat-expansion-panel-header:not(active) {
@@ -55,29 +43,16 @@ mat-header-cell.mat-header-cell {
 .mat-expansion-panel-header:hover,
 .mat-expansion-panel-header:focus,
 .mat-expansion-panel-header:active {
-  // background-color: gainsboro;
-  // background-color: darkgoldenrod !important;
-  // background-color: lavender !important;
-  // background-color: #7986cb !important;
-  // background-color: darkslategray !important;
-  // background-color: dimgray !important;
   background-color: rgb(141, 138, 138) !important;
 }
 
 .mat-expansion-panel-body {
-  // padding: 0 24px 16px;
-  // background-color: gold;
-  // background-color: #9fa8da;
-  // background-color: cadetblue;
   background-color: gainsboro;
 }
 
 .mat-raised-button.mat-zapisz {
   margin: 0, 20px;
-  // background-color: cadetblue;
-  // background-color: limegreen;
   background-color: #28a745;
-  // background-color: mediumblue;
   ;
   color: white;
   font-weight: 700;

@@ -49,7 +49,6 @@ export class DodawanieComponent implements OnInit {
       case RodzajDaniaEnum.DRUGIE_SNIADANIE:
         this.selectedType = 'drugie-sniadanie';
         this.typeOption = DrugieSniadanieConst;
-        // this.typeOption = SniadanieConst;
         break;
       case RodzajDaniaEnum.OBIAD:
         this.typeOption = ObiadConst;

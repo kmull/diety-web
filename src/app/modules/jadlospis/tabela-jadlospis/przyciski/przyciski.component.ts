@@ -8,8 +8,6 @@ import { DaniaAll } from 'src/app/models/dania-all';
 })
 export class PrzyciskiComponent implements OnInit {
 
-  // @Output() outSecondBreakfast = new EventEmitter<boolean>();
-  // @Output() outAfternoonSnack = new EventEmitter<boolean>();
 
   @Output() outOpenDialogZapisz = new EventEmitter<void>();
   @Output() outOpenDialogZapisaneDiety = new EventEmitter<void>();

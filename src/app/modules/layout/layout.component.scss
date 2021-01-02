@@ -18,11 +18,13 @@ a {
 a:hover {
   color: wheat;
   opacity: 0.85;
-  // background-color: navy;
-  background-color: black;
 }
 
 .mat-toolbar {
   background: rgb(30, 51, 51);
   color: #fff
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.5);
 }

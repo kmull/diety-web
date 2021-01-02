@@ -16,7 +16,6 @@ import { TypyDiet } from 'src/app/models/typy-diet';
 import { TableViewComponent } from './table-view/table-view.component';
 import * as XLSX from "xlsx";
 import * as cloneDeep from 'lodash/cloneDeep';
-import { TableUtil } from 'src/app/shared/utils/table-utils';
 
 @Component({
   selector: 'app-tabela-jadlospis',
@@ -99,11 +98,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
           if (!!danie && !!danie.rodzajDania && !!danie.danie) {
             const index = this.dataSourceList[this.index].findIndex(i => i.dzien === this.dzien);
             this.daniaList[this.index][index][danie.rodzajDania] = danie.danie;
-            console.log('this.daniaList', this.daniaList)
-
             this.typyDiet[this.index].dieta = cloneDeep(this.daniaList[this.index]);
-            console.log('this.typyDiet', this.typyDiet)
-
             this.dataSourceList[this.index][index][danie.rodzajDania] = this.mapDanieToString(danie.danie);
             this.refreshData();
           }
@@ -143,13 +138,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed().subscribe(dieta => {
       if (dieta) {
         this.dieta = dieta;
-        // console.log('this.dieta', this.dieta);
-        console.log('this.typyDiet', this.typyDiet);
-        // dane.forEach(k => {
-        //   const daniaList: TypyDiet = JSON.parse(k);
-        //   this.typyDiet[index].dieta = cloneDeep(daniaList.dieta);
-        //   this.daniaList.push(cloneDeep(daniaList.dieta));
-
         this.dieta.dane = [
           JSON.stringify(this.typyDiet[0]),
           JSON.stringify(this.typyDiet[1]),
@@ -164,7 +152,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
 
   openDialogZapisaneDiety(): void {
     this.dietaService.loadAllDiety().subscribe(dietaList => {
-      // console.log('dietaList', dietaList);
       const dialogRef = this.dialog.open(ZapisaneDietyModalComponent, {
         maxWidth: '95vw',
         maxHeight: '95vh',
@@ -174,7 +161,6 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       });
       dialogRef.afterClosed().subscribe((dieta: Dieta) => {
         if (dieta) {
-          console.log('dieta', dieta);
           this.dieta = dieta;
           this.mapLoadedDiet(dieta.dane);
           this.daniaList = cloneDeep(this.daniaList);
@@ -241,6 +227,7 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
       row.podwieczorek = null;
       row.kolacja = null;
     })
+    this.typyDiet[this.index].dieta = cloneDeep(this.daniaList[this.index]);
     this.refreshData();
   }
 
@@ -257,6 +244,8 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     this.daniaList[this.index][index].obiad = null;
     this.daniaList[this.index][index].podwieczorek = null;
     this.daniaList[this.index][index].kolacja = null;
+
+    this.typyDiet[this.index].dieta = cloneDeep(this.daniaList[this.index]);
     this.refreshData();
   }
 
@@ -264,6 +253,8 @@ export class TabelaJadlospisComponent implements OnInit, OnDestroy {
     const index = this.dataSourceList[this.index].findIndex(f => f.dzien === this.selectedDania.dzien);
     this.dataSourceList[this.index][index][selectedResetDanieOption] = null;
     this.daniaList[this.index][index][selectedResetDanieOption] = null;
+
+    this.typyDiet[this.index].dieta = cloneDeep(this.daniaList[this.index]);
     this.refreshData();
   }
 

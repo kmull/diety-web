@@ -10,7 +10,10 @@ import { Observable } from 'rxjs';
 export class DietaService {
 
   private httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({
+      Autorization: 'Basic ' + btoa(`diety_szpital:password`),
+      'Content-Type': 'application/json'
+    })
   };
 
   constructor(private http: HttpClient) { }

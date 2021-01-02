@@ -3,21 +3,13 @@ mat-tab-group {
   border-right: grey 2px solid;
 }
 
-
-// .mat-tab-labels,
-// .mat-tab-header,
-// .mat-tab-label-container {
-//   background-color: darkcyan !important;
-// }
-
 ::ng-deep .mat-tab-list {
-  // color: red;
-  background-color: darkcyan;
+  // background-color: darkcyan;
+  // background-color: lightseagreen;
+  background-color: rgb(0, 172, 172);
 }
 
 // /* active tab */
 ::ng-deep .mat-tab-list .mat-tab-labels .mat-tab-label-active {
-  // color: red;
-  // background-color: green;
   font-weight: 700;
 }
